@@ -57,11 +57,11 @@
             </objects>
             <point key="canvasLocation" x="1645" y="197"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="vzg-n0-ni5">
             <objects>
                 <navigationController id="xJy-C5-J2G" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="cQ9-72-8q0"/>
+                    <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" selectedImage="icon_listview-selected" id="cQ9-72-8q0"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qdq-sD-SNS">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -74,11 +74,11 @@
             </objects>
             <point key="canvasLocation" x="722" y="197"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="fNs-cN-zp6">
             <objects>
                 <navigationController id="oyv-QG-G7I" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="PhB-7V-3vP"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" selectedImage="icon_mapview-selected" id="PhB-7V-3vP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cey-5e-KpC">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -108,4 +108,10 @@
             <point key="canvasLocation" x="1645" y="-615"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_listview-deselected" width="75" height="50"/>
+        <image name="icon_listview-selected" width="75" height="50"/>
+        <image name="icon_mapview-deselected" width="75" height="50"/>
+        <image name="icon_mapview-selected" width="75" height="50"/>
+    </resources>
 </document>
