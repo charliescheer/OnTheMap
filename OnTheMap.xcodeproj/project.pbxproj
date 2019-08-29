@@ -13,6 +13,12 @@
 		BA8AAC3123174C4D000F6D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC3023174C4D000F6D75 /* Assets.xcassets */; };
 		BA8AAC3423174C4D000F6D75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC3223174C4D000F6D75 /* LaunchScreen.storyboard */; };
 		BA8AAC3F23174CCC000F6D75 /* MapAndPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC3E23174CCC000F6D75 /* MapAndPin.storyboard */; };
+		BA8AAC41231754CC000F6D75 /* MapAndPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC40231754CC000F6D75 /* MapAndPinViewController.swift */; };
+		BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC42231756A9000F6D75 /* MapViewController.swift */; };
+		BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC44231756FC000F6D75 /* PinListViewController.swift */; };
+		BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */; };
+		BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */; };
+		BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		BA8AAC3323174C4D000F6D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA8AAC3523174C4D000F6D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA8AAC3E23174CCC000F6D75 /* MapAndPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapAndPin.storyboard; sourceTree = "<group>"; };
+		BA8AAC40231754CC000F6D75 /* MapAndPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAndPinViewController.swift; sourceTree = "<group>"; };
+		BA8AAC42231756A9000F6D75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		BA8AAC44231756FC000F6D75 /* PinListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinListViewController.swift; sourceTree = "<group>"; };
+		BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
+		BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
+		BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 		BA8AAC2823174C49000F6D75 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				BA8AAC4823175BDA000F6D75 /* Helpers */,
 				BA8AAC3D23174C73000F6D75 /* Model */,
 				BA8AAC3C23174C6B000F6D75 /* Controller */,
 				BA8AAC3B23174C60000F6D75 /* View */,
@@ -80,6 +93,10 @@
 			children = (
 				BA8AAC2923174C49000F6D75 /* AppDelegate.swift */,
 				BA8AAC2B23174C49000F6D75 /* LoginViewController.swift */,
+				BA8AAC40231754CC000F6D75 /* MapAndPinViewController.swift */,
+				BA8AAC42231756A9000F6D75 /* MapViewController.swift */,
+				BA8AAC44231756FC000F6D75 /* PinListViewController.swift */,
+				BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -87,8 +104,17 @@
 		BA8AAC3D23174C73000F6D75 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		BA8AAC4823175BDA000F6D75 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,8 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA8AAC41231754CC000F6D75 /* MapAndPinViewController.swift in Sources */,
 				BA8AAC2C23174C49000F6D75 /* LoginViewController.swift in Sources */,
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
+				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
+				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
+				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,
+				BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */,
+				BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
