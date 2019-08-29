@@ -13,6 +13,9 @@
 		BA8AAC3123174C4D000F6D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC3023174C4D000F6D75 /* Assets.xcassets */; };
 		BA8AAC3423174C4D000F6D75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC3223174C4D000F6D75 /* LaunchScreen.storyboard */; };
 		BA8AAC3F23174CCC000F6D75 /* MapAndPin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC3E23174CCC000F6D75 /* MapAndPin.storyboard */; };
+		BA8AAC41231754CC000F6D75 /* MapAndPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC40231754CC000F6D75 /* MapAndPinViewController.swift */; };
+		BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC42231756A9000F6D75 /* MapViewController.swift */; };
+		BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC44231756FC000F6D75 /* PinListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		BA8AAC3323174C4D000F6D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA8AAC3523174C4D000F6D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA8AAC3E23174CCC000F6D75 /* MapAndPin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapAndPin.storyboard; sourceTree = "<group>"; };
+		BA8AAC40231754CC000F6D75 /* MapAndPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAndPinViewController.swift; sourceTree = "<group>"; };
+		BA8AAC42231756A9000F6D75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		BA8AAC44231756FC000F6D75 /* PinListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,9 @@
 			children = (
 				BA8AAC2923174C49000F6D75 /* AppDelegate.swift */,
 				BA8AAC2B23174C49000F6D75 /* LoginViewController.swift */,
+				BA8AAC40231754CC000F6D75 /* MapAndPinViewController.swift */,
+				BA8AAC42231756A9000F6D75 /* MapViewController.swift */,
+				BA8AAC44231756FC000F6D75 /* PinListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -163,8 +172,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA8AAC41231754CC000F6D75 /* MapAndPinViewController.swift in Sources */,
 				BA8AAC2C23174C49000F6D75 /* LoginViewController.swift in Sources */,
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
+				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
+				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

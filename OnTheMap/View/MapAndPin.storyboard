@@ -28,35 +28,6 @@
             </objects>
             <point key="canvasLocation" x="-435" y="-137"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="134-cl-uCj">
-            <objects>
-                <tableViewController id="PZ7-A3-18Q" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ListViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2bG-Md-bw5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5y3-bJ-llC">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5y3-bJ-llC" id="yIM-To-f4V">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="PZ7-A3-18Q" id="8vR-ye-A4Q"/>
-                            <outlet property="delegate" destination="PZ7-A3-18Q" id="fnH-WJ-wZB"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="cqg-j2-go4"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HNc-9Z-lwi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1645" y="197"/>
-        </scene>
         <!--List-->
         <scene sceneID="vzg-n0-ni5">
             <objects>
@@ -67,12 +38,28 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="PZ7-A3-18Q" kind="relationship" relationship="rootViewController" id="ZyB-s3-6aP"/>
+                        <segue destination="AnP-U9-rs2" kind="relationship" relationship="rootViewController" id="AcY-Wp-KIV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Azg-gY-oYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="722" y="197"/>
+        </scene>
+        <!--Pin List View Controller-->
+        <scene sceneID="VEr-jK-Iko">
+            <objects>
+                <viewController id="AnP-U9-rs2" customClass="PinListViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ev8-ha-vfb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="284-BH-Pcl"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hzi-OX-uxe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HB5-nq-gIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1645" y="197"/>
         </scene>
         <!--Map-->
         <scene sceneID="fNs-cN-zp6">
@@ -91,10 +78,10 @@
             </objects>
             <point key="canvasLocation" x="741" y="-615"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="6NC-F4-Hwi">
             <objects>
-                <viewController id="h3e-Bg-iRh" sceneMemberID="viewController">
+                <viewController id="h3e-Bg-iRh" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="MapViewController" id="Hn2-nc-faz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
