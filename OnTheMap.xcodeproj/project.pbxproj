@@ -18,6 +18,7 @@
 		BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC44231756FC000F6D75 /* PinListViewController.swift */; };
 		BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */; };
 		BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */; };
+		BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		BA8AAC44231756FC000F6D75 /* PinListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinListViewController.swift; sourceTree = "<group>"; };
 		BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 		BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
+		BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		BA8AAC3D23174C73000F6D75 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
 				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,
 				BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */,
+				BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

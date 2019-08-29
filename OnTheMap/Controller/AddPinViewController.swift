@@ -9,7 +9,10 @@
 import UIKit
 
 class AddPinViewController: UIViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
     
 }
 
