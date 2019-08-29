@@ -30,7 +30,16 @@ class MapAndPinViewController: UIViewController {
     }
     
     @objc func addWasTapped() {
-        print("add was tapped")
+        let destination = AddPinViewController.loadViewController()
+        self.navigationController?.pushViewController(destination, animated: true)
     }
 
+    
+}
+
+
+extension MapAndPinViewController {
+    enum constants {
+        static let addSegue = "showAdd"
+    }
 }

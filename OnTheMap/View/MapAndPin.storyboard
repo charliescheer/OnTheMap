@@ -56,6 +56,9 @@
                         <viewLayoutGuide key="safeArea" id="284-BH-Pcl"/>
                     </view>
                     <navigationItem key="navigationItem" id="hzi-OX-uxe"/>
+                    <connections>
+                        <segue destination="hxQ-XM-kes" kind="presentation" identifier="showAdd" id="TSu-2p-BNi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HB5-nq-gIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,10 +92,28 @@
                         <viewLayoutGuide key="safeArea" id="9bW-12-H2J"/>
                     </view>
                     <navigationItem key="navigationItem" id="cEm-HH-f4j"/>
+                    <connections>
+                        <segue destination="hxQ-XM-kes" kind="presentation" identifier="showAdd" id="oMe-ir-Uzm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CY7-K2-1z9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1645" y="-615"/>
+        </scene>
+        <!--Add Location-->
+        <scene sceneID="DkU-fA-Pvc">
+            <objects>
+                <viewController restorationIdentifier="AddPinViewController" storyboardIdentifier="AddPinViewController" title="Add Location" id="hxQ-XM-kes" customClass="AddPinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sIQ-Aj-pZu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="GVS-VD-woZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tmI-sd-yAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2959" y="-137"/>
         </scene>
     </scenes>
     <resources>
@@ -101,4 +122,7 @@
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_mapview-selected" width="75" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TSu-2p-BNi"/>
+    </inferredMetricsTieBreakers>
 </document>
