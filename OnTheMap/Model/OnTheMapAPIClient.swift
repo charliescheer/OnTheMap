@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Auth {
     
@@ -34,9 +35,13 @@ class OnTheMapAPIClient {
         
         makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
             if response != nil {
-                completion(true, nil)
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
             } else {
-                completion(false, nil)
+                DispatchQueue.main.async {
+                    completion(false, nil)
+                }
             }
         }
         
@@ -82,11 +87,15 @@ class OnTheMapAPIClient {
             
             do {
                 let decodedData = try decoder.decode(ResponseType.self, from: newData)
-                completion(decodedData, nil)
+                DispatchQueue.main.async {
+                    completion(decodedData, nil)
+                }
             } catch {
                 do {
                     let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: newData)
-                    completion(nil, errorResponse)
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
                 } catch {
                     print(error)
                 }

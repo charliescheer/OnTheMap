@@ -27,6 +27,15 @@ class LoginViewController: UIViewController {
         OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!) { (success, error) in
             if success {
                 print(success)
+                let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
+                
+                guard let destination = storyboard.instantiateInitialViewController() else {
+                    print("failed to instantiate view controller")
+                    return
+                }
+                
+                self.present(destination, animated: true, completion: nil)
+
             } else {
                 print(error!.localizedDescription)
                 self.passwordTextField.text = ""
