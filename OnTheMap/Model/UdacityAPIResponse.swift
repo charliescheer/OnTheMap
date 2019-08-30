@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct UdacityAPILoginResponse: Decodable {
+struct UdacityAPILoginResponse: Codable {
     let account: Account
     let session: Session
 }
     
-    struct Account: Decodable {
+    struct Account: Codable {
         let key: String
         let registered: Bool
     }
     
-    struct Session: Decodable {
+    struct Session: Codable {
         let expiration: String
         let sessionId: String
         

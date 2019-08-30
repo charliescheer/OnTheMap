@@ -23,6 +23,10 @@ class MapAndPinViewController: UIViewController {
     
     @objc func logoutWasTapped() {
         dismiss(animated: true, completion: nil)
+    
+        
+        UserDefaults.standard.set(nil, forKey: "sessionId")
+        
     }
     
     @objc func reloadWasTapped() {

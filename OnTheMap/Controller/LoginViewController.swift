@@ -27,15 +27,8 @@ class LoginViewController: UIViewController {
         OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!) { (success, error) in
             if success {
                 print(success)
-                let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
-                
-                guard let destination = storyboard.instantiateInitialViewController() else {
-                    print("failed to instantiate view controller")
-                    return
-                }
-                
-                self.present(destination, animated: true, completion: nil)
-
+                self.transitionToMapAndPinStoryBoard()
+            
             } else {
                 print(error!.localizedDescription)
                 self.passwordTextField.text = ""
@@ -44,6 +37,21 @@ class LoginViewController: UIViewController {
         
     }
     
+    @IBAction func signUpWasTapped(_ sender: Any) {
+        UIApplication.shared.open(OnTheMapAPIClient.Endpoints.signup.url)
+        
+    }
     
+    func transitionToMapAndPinStoryBoard() {
+        let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
+        
+        guard let destination = storyboard.instantiateInitialViewController() else {
+            print("failed to instantiate view controller")
+            return
+        }
+        
+        self.present(destination, animated: true, completion: nil)
+
+    }
 }
 

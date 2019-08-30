@@ -9,19 +9,22 @@
 import Foundation
 import UIKit
 
-struct Auth {
-    
-}
 
 class OnTheMapAPIClient {
+    struct Auth: Codable {
+        static var sessionId = ""
+    }
+    
     enum Endpoints {
         static let baseURL =  "https://onthemap-api.udacity.com/v1/"
         
         case login
+        case signup
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.baseURL + "session"
+            case .signup: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             }
         }
         
@@ -34,9 +37,19 @@ class OnTheMapAPIClient {
         let sessionRequest = UdacitySessionRequest(username: username, password: password)
         
         makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
-            if response != nil {
+            if let response = response {
+                Auth.sessionId = response.session.sessionId
+                print(Auth.sessionId)
                 DispatchQueue.main.async {
                     completion(true, nil)
+                }
+                
+                let encoder = PropertyListEncoder()
+                do {
+                    let data = try encoder.encode(response)
+                    UserDefaults.standard.set(data, forKey: "sessionId")
+                } catch {
+                    print(error.localizedDescription)
                 }
             } else {
                 DispatchQueue.main.async {
@@ -44,7 +57,6 @@ class OnTheMapAPIClient {
                 }
             }
         }
-        
     }
     
     
@@ -102,6 +114,34 @@ class OnTheMapAPIClient {
             }
         }
         session.resume()
+    }
+    
+    class func authSessionIdIsSavedToUserDefaults() -> Bool {
+        guard (UserDefaults.standard.data(forKey: "sessionId") != nil) else {
+            print("No Saved Data")
+            return false
+        }
+        
+        return true
+    }
+    
+    class func setSavedAuthSessionId() {
+        guard let data = UserDefaults.standard.data(forKey: "sessionId") else {
+            print("No Saved Data")
+            return
+        }
+        
+        print("decoder created")
+        let decoder = PropertyListDecoder()
+        do {
+            print("decoder running")
+            let decodedResponse = try decoder.decode(UdacityAPILoginResponse.self, from: data)
+            print("decoder finished")
+            Auth.sessionId = decodedResponse.session.sessionId
+            print(Auth.sessionId)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
