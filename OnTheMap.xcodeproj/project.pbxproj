@@ -23,6 +23,7 @@
 		BA8AAC522318ABA0000F6D75 /* UdacityAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */; };
 		BA8AAC542318F922000F6D75 /* UdacityAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */; };
 		BA8AAC562319020E000F6D75 /* LoginTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC552319020E000F6D75 /* LoginTextFieldDelegate.swift */; };
+		BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIResponse.swift; sourceTree = "<group>"; };
 		BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIErrorResponse.swift; sourceTree = "<group>"; };
 		BA8AAC552319020E000F6D75 /* LoginTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldDelegate.swift; sourceTree = "<group>"; };
+		BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPILogoutResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */,
 				BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */,
 				BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */,
+				BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				BA8AAC502318A164000F6D75 /* UdacitySessionRequest.swift in Sources */,
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
 				BA8AAC562319020E000F6D75 /* LoginTextFieldDelegate.swift in Sources */,
+				BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */,
 				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
 				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
 				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,

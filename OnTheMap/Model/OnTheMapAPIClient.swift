@@ -20,11 +20,13 @@ class OnTheMapAPIClient {
         
         case login
         case signup
+        case logout
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.baseURL + "session"
             case .signup: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
+            case .logout: return Endpoints.baseURL + "session"
             }
         }
         
@@ -85,15 +87,12 @@ class OnTheMapAPIClient {
                 print("data was nil")
                 return
             }
-            guard data.count != 0 else {
-                print("The data received from the server was empty")
-                return
-            }
             
             //Remove the first 5 characters from data per Udacity security spac
             //Decode data and return the resonse to the completion handler
-            let range = 5..<data.count
-            let newData = data.subdata(in: range)
+            guard let newData = removeSecurityDataFromResponseData(data) else {
+                return
+            }
             
             let decoder = JSONDecoder()
             
@@ -114,6 +113,79 @@ class OnTheMapAPIClient {
             }
         }
         session.resume()
+    }
+    
+    class func taskForDeleteRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            guard let newData = removeSecurityDataFromResponseData(data) else {
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            do {
+                let response = try decoder.decode(ResponseType.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(response, nil)
+                }
+            } catch {
+                do {
+                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: newData)
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                } catch {
+                    print("here?")
+                    print(error)
+                }
+            }
+            
+        }
+        task.resume()
+    }
+    
+    class func Logout(completion: @escaping (Bool, Error?) -> Void) {
+        taskForDeleteRequest(url: OnTheMapAPIClient.Endpoints.logout.url, responseType: UdacityAPILogoutResponse.self) { (response, error) in
+            if let response = response {
+                UserDefaults.standard.set(nil, forKey: "sessionId")
+                print(response.session.sessionId)
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+    }
+
+
+    class func removeSecurityDataFromResponseData(_ data: Data) -> Data? {
+        guard data.count != 0 else {
+            print("The data received from the server was empty")
+            return nil
+        }
+        
+        let range = 5..<data.count
+        
+        return data.subdata(in: range)
     }
     
     class func authSessionIdIsSavedToUserDefaults() -> Bool {

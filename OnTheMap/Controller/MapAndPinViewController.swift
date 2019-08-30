@@ -22,10 +22,16 @@ class MapAndPinViewController: UIViewController {
     
     
     @objc func logoutWasTapped() {
-        dismiss(animated: true, completion: nil)
-    
+        OnTheMapAPIClient.Logout { (success, error) in
+            if success {
+                print("Success")
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print(error?.localizedDescription ?? "Generic Error while logging out")
+            }
+        }
         
-        UserDefaults.standard.set(nil, forKey: "sessionId")
+        
         
     }
     
