@@ -24,6 +24,7 @@
 		BA8AAC542318F922000F6D75 /* UdacityAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */; };
 		BA8AAC562319020E000F6D75 /* LoginTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC552319020E000F6D75 /* LoginTextFieldDelegate.swift */; };
 		BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */; };
+		BA8AAC5C2319DC27000F6D75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC5B2319DC27000F6D75 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIErrorResponse.swift; sourceTree = "<group>"; };
 		BA8AAC552319020E000F6D75 /* LoginTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldDelegate.swift; sourceTree = "<group>"; };
 		BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPILogoutResponse.swift; sourceTree = "<group>"; };
+		BA8AAC5B2319DC27000F6D75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */,
+				BA8AAC5B2319DC27000F6D75 /* User.swift */,
 				BA8AAC5A2319BC37000F6D75 /* Request */,
 				BA8AAC592319BC29000F6D75 /* Response */,
 			);
@@ -226,6 +229,7 @@
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
 				BA8AAC562319020E000F6D75 /* LoginTextFieldDelegate.swift in Sources */,
 				BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */,
+				BA8AAC5C2319DC27000F6D75 /* User.swift in Sources */,
 				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
 				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
 				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,

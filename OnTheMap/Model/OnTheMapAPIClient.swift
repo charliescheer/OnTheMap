@@ -13,6 +13,7 @@ import UIKit
 class OnTheMapAPIClient {
     struct Auth: Codable {
         static var sessionId = ""
+        static var key = ""
     }
     
     enum Endpoints {
@@ -21,12 +22,14 @@ class OnTheMapAPIClient {
         case login
         case signup
         case logout
+        case getUserData(String)
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.baseURL + "session"
             case .signup: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             case .logout: return Endpoints.baseURL + "session"
+            case .getUserData(let userId): return Endpoints.baseURL + "users/" + userId
             }
         }
         
@@ -83,27 +86,23 @@ class OnTheMapAPIClient {
         //Begin URL Session with created Request
         let session = URLSession.shared.dataTask(with: request) { (data, response, error) in
             //Check to make sure the data returned is not nil and is not empty
-            guard let data = data else {
-                print("data was nil")
-                return
-            }
-            
             //Remove the first 5 characters from data per Udacity security spac
             //Decode data and return the resonse to the completion handler
-            guard let newData = removeSecurityDataFromResponseData(data) else {
+            guard let data = removeSecurityDataFromResponseData(data) else {
+                print("data was nil")
                 return
             }
             
             let decoder = JSONDecoder()
             
             do {
-                let decodedData = try decoder.decode(ResponseType.self, from: newData)
+                let decodedData = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(decodedData, nil)
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: newData)
+                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: data)
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
@@ -130,23 +129,20 @@ class OnTheMapAPIClient {
         }
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
+            guard let data = removeSecurityDataFromResponseData(data) else {
                 return
             }
             
-            guard let newData = removeSecurityDataFromResponseData(data) else {
-                return
-            }
             
             let decoder = JSONDecoder()
             do {
-                let response = try decoder.decode(ResponseType.self, from: newData)
+                let response = try decoder.decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
                     completion(response, nil)
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: newData)
+                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: data)
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
@@ -177,7 +173,11 @@ class OnTheMapAPIClient {
     }
 
 
-    class func removeSecurityDataFromResponseData(_ data: Data) -> Data? {
+    class func removeSecurityDataFromResponseData(_ data: Data?) -> Data? {
+        guard let data = data else {
+            return nil
+        }
+        
         guard data.count != 0 else {
             print("The data received from the server was empty")
             return nil
@@ -214,6 +214,25 @@ class OnTheMapAPIClient {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    class func getLoggedInUserData(url: URL, userId: String) {
+        //Check to make sure the saved UserId is not empty
+        guard userId.count != 0 else {
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            guard let data = removeSecurityDataFromResponseData(data ?? nil) else {
+                return
+            }
+        
+            print(String(data: data, encoding: .utf8)!)
+            
+        }
+        task.resume()
     }
 }
 
