@@ -12,3 +12,9 @@ struct UdacityAPIErrorResponse: Codable {
     let status: Int
     let error: String
 }
+
+extension UdacityAPIErrorResponse: LocalizedError {
+    var errorDescription: String? {
+        return error
+    }
+}
