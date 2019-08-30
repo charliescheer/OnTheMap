@@ -33,7 +33,7 @@ class OnTheMapAPIClient {
         let sessionRequest = UdacitySessionRequest(username: username, password: password)
         
         makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
-            if let response = response {
+            if response != nil {
                 completion(true, nil)
             } else {
                 completion(false, nil)
