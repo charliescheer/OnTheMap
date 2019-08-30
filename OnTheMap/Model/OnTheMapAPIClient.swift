@@ -103,32 +103,5 @@ class OnTheMapAPIClient {
         }
         session.resume()
     }
-    
-    class func copiedFromDocumentation(_ data : Data) {
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        // encoding a JSON body from a string, can also use a Codable struct
-        
-//        request.httpBody = "{\"udacity\": {\"username\": \"scheer.charlie@gmail.com\", \"password\": \"raa8c4TEsUQRK2GvD(FnTEUD7\"}}".data(using: .utf8)
-        request.httpBody = data
-        let session = URLSession.shared
-        print("pretask")
-        let task = session.dataTask(with: request) { data, response, error in
-            if error != nil { // Handle error…
-                print("error")
-                print(error)
-                return
-            }
-            let range = 5..<data!.count
-            
-            print("predata")
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(String(data: newData!, encoding: .utf8)!)
-        }
-        task.resume()
-    }
-    
 }
 
