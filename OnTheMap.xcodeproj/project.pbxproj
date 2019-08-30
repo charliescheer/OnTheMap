@@ -115,10 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */,
-				BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */,
-				BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */,
-				BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */,
-				BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */,
+				BA8AAC5A2319BC37000F6D75 /* Request */,
+				BA8AAC592319BC29000F6D75 /* Response */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,6 +128,24 @@
 				BA8AAC552319020E000F6D75 /* LoginTextFieldDelegate.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BA8AAC592319BC29000F6D75 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */,
+				BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */,
+				BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		BA8AAC5A2319BC37000F6D75 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
