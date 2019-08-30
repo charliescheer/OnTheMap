@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UdacityAPIResponse: Decodable {
+struct UdacityAPILoginResponse: Decodable {
     let account: Account
     let session: Session
 }

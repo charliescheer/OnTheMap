@@ -29,17 +29,18 @@ class OnTheMapAPIClient {
         }
     }
     
-//    class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-//        let sessionRequest = UdacitySessionRequest(username: username, password: password)
-//
-//        makePostRequest(url: Endpoints.login.url, requestType: UdacitySessionRequest.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
-//            if let response = response {
-//                completion(true, nil)
-//            } else {
-//                completion(false, error)
-//            }
-//        }
-//    }
+    class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+        let sessionRequest = UdacitySessionRequest(username: username, password: password)
+        
+        makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
+            if let response = response {
+                completion(true, nil)
+            } else {
+                completion(false, nil)
+            }
+        }
+        
+    }
     
     
     class func makePostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, headers: [String], body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void ) {
