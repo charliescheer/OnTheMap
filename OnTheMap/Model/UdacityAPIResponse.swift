@@ -9,6 +9,21 @@
 import Foundation
 
 struct UdacityAPIResponse: Codable {
-    let status: String
-    let error: String
+    let account: Account
+    let session: Session
 }
+    
+    struct Account: Codable {
+        let key: String
+        let registered: Bool
+    }
+    
+    struct Session: Codable {
+        let expiration: String
+        let sessionId: String
+        
+        enum CodingKeys: String, CodingKey {
+            case expiration
+            case sessionId = "id"
+        }
+    }
