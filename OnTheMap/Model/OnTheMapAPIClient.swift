@@ -121,43 +121,5 @@ class OnTheMapAPIClient {
         task.resume()
     }
     
-    class func createJSONDataFromString() -> Data {
-        guard let data = "{\"udacity\": {\"username\": \"scheer.charlie@gmail.com\", \"password\": \"raa8c4TEsUQRK2GvD(FnTEUD7\"}}".data(using: .utf8) else {
-            return Data()
-        }
-        
-        
-        return data
-    }
-    
-    class func createJSONDataFromObject() -> Data {
-        let request = UdacitySessionRequest(username: "scheer.charlie@gmail.com", password: "raa8c4TEsUQRK2GvD(FnTEUD7")
-        let encoder = JSONEncoder()
-        
-        guard let data = try? encoder.encode(request) else {
-            return Data()
-        }
-        
-        return data
-    }
-    
-    class func decodeDummbyData(_ data: Data){
-        print(data)
-        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : AnyObject] else {
-            return
-        }
-        
-        print(json)
-    }
-    
-//    class func decodeTextData(_ data: Data){
-//        print(data)
-//        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String : AnyObject] else {
-//            return
-//        }
-//
-//        print(json)
-//    }
-    
 }
 

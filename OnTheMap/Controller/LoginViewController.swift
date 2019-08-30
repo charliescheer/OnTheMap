@@ -21,17 +21,13 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginWasTapped(_ sender: Any) {
-        OnTheMapAPIClient.makePostRequest(url: OnTheMapAPIClient.Endpoints.login.url, requestType: UdacitySessionRequest.self, headers: ["Accept", "Content-Type"], body: UdacitySessionRequest(username: usernameTextField.text!, password: passwordTextField.text!)) { (response, error) in
-            print(response)
-            print(error)
+        OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!) { (success, error) in
+            if success {
+                print(success)
+            } else {
+                print(error)
+            }
         }
-//        OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!) { (success, error) in
-//            if success {
-//                print(success)
-//            } else {
-//                print(error)
-//            }
-//        }
         
 //        let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
 //
