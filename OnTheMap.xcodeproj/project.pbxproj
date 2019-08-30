@@ -20,6 +20,7 @@
 		BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */; };
 		BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */; };
 		BA8AAC502318A164000F6D75 /* UdacitySessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */; };
+		BA8AAC522318ABA0000F6D75 /* UdacityAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapAPIClient.swift; sourceTree = "<group>"; };
 		BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacitySessionRequest.swift; sourceTree = "<group>"; };
+		BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */,
 				BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */,
+				BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
 				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
 				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,
+				BA8AAC522318ABA0000F6D75 /* UdacityAPIResponse.swift in Sources */,
 				BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */,
 				BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */,
 			);

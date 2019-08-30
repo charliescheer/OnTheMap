@@ -1,5 +1,5 @@
 //
-//  UdacitySessionRequest.swift
+//  UdacityAPIResponse.swift
 //  OnTheMap
 //
 //  Created by Charlie Scheer on 8/29/19.
@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct UdacitySessionRequest: Codable {
-    let username: String
-    let password: String
-    
+struct UdacityAPIResponse: Codable {
+    let status: String
+    let error: String
 }
