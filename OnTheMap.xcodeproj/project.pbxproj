@@ -19,6 +19,7 @@
 		BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */; };
 		BA8AAC4A23175BEE000F6D75 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */; };
 		BA8AAC4C231897B0000F6D75 /* OnTheMapAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */; };
+		BA8AAC502318A164000F6D75 /* UdacitySessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		BA8AAC46231758EC000F6D75 /* AddPinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinViewController.swift; sourceTree = "<group>"; };
 		BA8AAC4923175BEE000F6D75 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapAPIClient.swift; sourceTree = "<group>"; };
+		BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacitySessionRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8AAC4B231897B0000F6D75 /* OnTheMapAPIClient.swift */,
+				BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			files = (
 				BA8AAC41231754CC000F6D75 /* MapAndPinViewController.swift in Sources */,
 				BA8AAC2C23174C49000F6D75 /* LoginViewController.swift in Sources */,
+				BA8AAC502318A164000F6D75 /* UdacitySessionRequest.swift in Sources */,
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
 				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
 				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
