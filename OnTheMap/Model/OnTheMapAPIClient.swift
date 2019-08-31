@@ -201,7 +201,7 @@ class OnTheMapAPIClient {
         return true
     }
     
-    class func setSavedAuthSessionId() {
+    class func setSavedAuthSessionIdandUserID() {
         guard let data = UserDefaults.standard.data(forKey: "sessionId") else {
             print("No Saved Data")
             return
@@ -214,6 +214,7 @@ class OnTheMapAPIClient {
             let decodedResponse = try decoder.decode(UdacityAPILoginResponse.self, from: data)
             print("decoder finished")
             Auth.sessionId = decodedResponse.session.sessionId
+            Auth.key = decodedResponse.account.key
             print(Auth.sessionId)
         } catch {
             print(error.localizedDescription)

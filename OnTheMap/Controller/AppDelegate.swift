@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if OnTheMapAPIClient.authSessionIdIsSavedToUserDefaults() {
             print("found session ID")
             
-            OnTheMapAPIClient.setSavedAuthSessionId()
+            OnTheMapAPIClient.setSavedAuthSessionIdandUserID()
 
             let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
             let initialVC = storyboard.instantiateInitialViewController()

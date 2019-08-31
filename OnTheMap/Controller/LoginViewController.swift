@@ -55,3 +55,8 @@ class LoginViewController: UIViewController {
     }
 }
 
+extension LoginViewController: StoryboardLoadable {
+    static var storyboardName: String {
+        return "Login"
+    }
+}

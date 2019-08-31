@@ -25,7 +25,11 @@ class MapAndPinViewController: UIViewController {
         OnTheMapAPIClient.Logout { (success, error) in
             if success {
                 print("Success")
-                self.dismiss(animated: true, completion: nil)
+//                self.dismiss(animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    let destinationVC = LoginViewController.loadViewController()
+                    self.present(destinationVC, animated: true, completion: nil)
+                }
             } else {
                 print(error?.localizedDescription ?? "Generic Error while logging out")
             }

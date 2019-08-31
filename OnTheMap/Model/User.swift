@@ -21,9 +21,9 @@ struct User: Codable {
     
     enum CodingKeys: String, CodingKey {
         case lastName = "last_name"
-        case socialAccounts
-        case mailingAddress
-        case facebookId
+        case socialAccounts = "social_accounts"
+        case mailingAddress = "mailing_accounts"
+        case facebookId = "_facebook_id"
         case firstName = "first_name"
         case email
         case websiteURL = "website_url"
