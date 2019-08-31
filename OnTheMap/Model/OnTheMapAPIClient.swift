@@ -22,14 +22,14 @@ class OnTheMapAPIClient {
         case login
         case signup
         case logout
-        case getUserData(String)
+        case getUserData
         
         var stringValue: String {
             switch self {
             case .login: return Endpoints.baseURL + "session"
             case .signup: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             case .logout: return Endpoints.baseURL + "session"
-            case .getUserData(let userId): return Endpoints.baseURL + "users/" + userId
+            case .getUserData: return Endpoints.baseURL + "users/" + Auth.key
             }
         }
         
@@ -44,6 +44,7 @@ class OnTheMapAPIClient {
         makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
             if let response = response {
                 Auth.sessionId = response.session.sessionId
+                Auth.key = response.account.key
                 print(Auth.sessionId)
                 DispatchQueue.main.async {
                     completion(true, nil)
@@ -173,6 +174,9 @@ class OnTheMapAPIClient {
     }
 
 
+    //Takes optional data and confirms the data is not nil
+    //If the data is not nil, checks to see if the data is not empty
+    //If both checks pass, removes the frist five characters from the data and returns the new data
     class func removeSecurityDataFromResponseData(_ data: Data?) -> Data? {
         guard let data = data else {
             return nil
@@ -219,17 +223,26 @@ class OnTheMapAPIClient {
     class func getLoggedInUserData(url: URL, userId: String) {
         //Check to make sure the saved UserId is not empty
         guard userId.count != 0 else {
+            print("no user id")
             return
         }
         
         let request = URLRequest(url: url)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            guard let data = removeSecurityDataFromResponseData(data ?? nil) else {
+            guard let data = removeSecurityDataFromResponseData(data) else {
+                print("data modification failed")
                 return
             }
         
-            print(String(data: data, encoding: .utf8)!)
+            let decoder = JSONDecoder()
+            
+            do {
+                let loggedInUser = try decoder.decode(User.self, from: data)
+                print(loggedInUser.firstName + " " + loggedInUser.lastName)
+            } catch {
+                print(error)
+            }
             
         }
         task.resume()
