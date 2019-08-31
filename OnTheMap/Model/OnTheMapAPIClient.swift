@@ -204,6 +204,7 @@ class OnTheMapAPIClient {
         return true
     }
     
+    //Check to see if there is saved data in Userdefaults for the sessionId
     class func setSavedAuthSessionIdandUserID() {
         guard let data = UserDefaults.standard.data(forKey: "sessionId") else {
             print("No Saved Data")
@@ -223,6 +224,7 @@ class OnTheMapAPIClient {
             print(error.localizedDescription)
         }
     }
+    
     
     class func getLoggedInUserData(url: URL, userId: String) {
         //Check to make sure the saved UserId is not empty

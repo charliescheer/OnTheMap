@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("found session ID")
             
             OnTheMapAPIClient.setSavedAuthSessionIdandUserID()
+            //TO DO: figure out why when reloading the get user info doesn't work
+            //TO DO: Once figured out fix the app delegate methods to login with a correct session or user key.
+            
             
             let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
             let initialVC = storyboard.instantiateInitialViewController()
