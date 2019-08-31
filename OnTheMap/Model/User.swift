@@ -15,7 +15,7 @@ struct User: Codable {
     let facebookId: String?
     let firstName: String
     let email: Email
-    let websiteURL: String
+    let websiteURL: String?
     let nickname: String
     let userId: String
     

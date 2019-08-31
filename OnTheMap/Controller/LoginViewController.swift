@@ -11,6 +11,9 @@ import UIKit
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
     
     let loginTextFieldDelegate = LoginTextFieldDelegate()
     
@@ -24,16 +27,8 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginWasTapped(_ sender: Any) {
-        OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!) { (success, error) in
-            if success {
-                print(success)
-                self.transitionToMapAndPinStoryBoard()
-            
-            } else {
-                print(error!.localizedDescription)
-                self.passwordTextField.text = ""
-            }
-        }
+        startActivityIndicator(bool: true)
+        OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!, completion: handleLoginResponse(success:error:))
         
     }
     
@@ -52,6 +47,29 @@ class LoginViewController: UIViewController {
         
         self.present(destination, animated: true, completion: nil)
 
+    }
+    
+    func handleLoginResponse(success: Bool, error: Error?) {
+        if success {
+            print(success)
+            startActivityIndicator(bool: false)
+            self.transitionToMapAndPinStoryBoard()
+        } else {
+            print(error!.localizedDescription)
+            self.passwordTextField.text = ""
+        }
+    }
+    
+    func startActivityIndicator(bool: Bool) {
+        if bool {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+        loginButton.isEnabled = !bool
+        signUpButton.isEnabled = !bool
+        usernameTextField.isEnabled = !bool
+        passwordTextField.isEnabled = !bool
     }
 }
 

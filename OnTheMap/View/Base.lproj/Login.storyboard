@@ -69,6 +69,9 @@
                                     <constraint firstAttribute="width" constant="250" id="ueP-Dg-CcN"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7ba-Iu-31c">
+                                <rect key="frame" x="177.5" y="425" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -76,11 +79,13 @@
                             <constraint firstItem="NKg-Fd-7o3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Ct5-q5-WGM"/>
                             <constraint firstItem="1gx-La-TlL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Der-YK-ydt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="92L-D3-RdW" secondAttribute="trailing" constant="16" id="U6G-gj-Q0A"/>
+                            <constraint firstItem="7ba-Iu-31c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XCg-XP-sc1"/>
                             <constraint firstItem="y5P-MI-Sp8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Y41-Zd-DpU"/>
                             <constraint firstItem="1gx-La-TlL" firstAttribute="top" secondItem="vdr-Yr-trB" secondAttribute="bottom" constant="16" id="e76-9n-Cm9"/>
                             <constraint firstItem="NKg-Fd-7o3" firstAttribute="top" secondItem="92L-D3-RdW" secondAttribute="bottom" constant="10" id="eRj-v0-lQK"/>
                             <constraint firstItem="y5P-MI-Sp8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fWU-jA-Xrz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vdr-Yr-trB" secondAttribute="trailing" constant="16" id="h0J-C9-3fA"/>
+                            <constraint firstItem="7ba-Iu-31c" firstAttribute="top" secondItem="1gx-La-TlL" secondAttribute="bottom" constant="8" id="hL8-kz-QXu"/>
                             <constraint firstItem="92L-D3-RdW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="jkz-Sv-mkd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NKg-Fd-7o3" secondAttribute="trailing" constant="16" id="lvh-Tg-KUj"/>
                             <constraint firstItem="92L-D3-RdW" firstAttribute="top" secondItem="y5P-MI-Sp8" secondAttribute="bottom" constant="50" id="sxL-Jh-8Va"/>
@@ -89,7 +94,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="7ba-Iu-31c" id="BAe-2l-SOi"/>
+                        <outlet property="loginButton" destination="vdr-Yr-trB" id="riK-6w-QyQ"/>
                         <outlet property="passwordTextField" destination="NKg-Fd-7o3" id="lfd-Tu-OaH"/>
+                        <outlet property="signUpButton" destination="YvT-QC-5Ke" id="mCf-Sj-XKY"/>
                         <outlet property="usernameTextField" destination="92L-D3-RdW" id="kRU-Uq-PRL"/>
                     </connections>
                 </viewController>

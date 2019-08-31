@@ -47,7 +47,7 @@ class OnTheMapAPIClient {
             if let response = response {
                 Auth.sessionId = response.session.sessionId
                 Auth.key = response.account.key
-                print(Auth.sessionId)
+                
                 DispatchQueue.main.async {
                     completion(true, nil)
                 }
@@ -230,8 +230,11 @@ class OnTheMapAPIClient {
             print("no user id")
             return
         }
-        
+        print(userId)
+        print(url)
+
         let request = URLRequest(url: url)
+        print(request)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             guard let data = removeSecurityDataFromResponseData(data) else {
@@ -239,7 +242,11 @@ class OnTheMapAPIClient {
                 return
             }
         
+            print(response)
             let decoder = JSONDecoder()
+            
+            let json = try! JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
             
             do {
                 let loggedInUser = try decoder.decode(User.self, from: data)

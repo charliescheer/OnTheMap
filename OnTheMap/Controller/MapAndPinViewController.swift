@@ -13,6 +13,9 @@ class MapAndPinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(OnTheMapAPIClient.Auth.key)
+        print(OnTheMapAPIClient.Auth.sessionId)
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutWasTapped))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWasTapped)),
