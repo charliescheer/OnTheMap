@@ -55,7 +55,8 @@ class LoginViewController: UIViewController {
             self.startActivityIndicator(self.activityIndicator, false)
             self.transitionToMapAndPinStoryBoard()
         } else {
-            print(error!.localizedDescription)
+            print(error?.localizedDescription)
+            displayUIAlert(titled: "Error", withMessage: error!.localizedDescription)
             self.passwordTextField.text = ""
         }
     }

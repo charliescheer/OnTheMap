@@ -191,7 +191,7 @@ class OnTheMapAPIClient {
                 }
             } else {
                 DispatchQueue.main.async {
-                    completion(false, nil)
+                    completion(false, error)
                 }
             }
         }
