@@ -18,23 +18,10 @@ class MapAndPinViewController: UIViewController {
 //        print(OnTheMapAPIClient.Auth.key)
 //        print(OnTheMapAPIClient.Auth.sessionId)
         
-//        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
-//            if success {
-//                if let studentLocationArray = results {
-//                    self.studentLocationResults = studentLocationArray
-//                    print("success")
-//                    print(self.studentLocationResults.count)
-//                }
-//            } else {
-//                print("Fail")
-//                print(error)
-//            }
-//        }
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutWasTapped))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWasTapped)),
-            UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadWasTapped))
+            UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.reloadWasTapped)),
         ]
     }
     
@@ -42,7 +29,6 @@ class MapAndPinViewController: UIViewController {
         OnTheMapAPIClient.Logout { (success, error) in
             if success {
                 print("Success")
-//                self.dismiss(animated: true, completion: nil)
                 DispatchQueue.main.async {
                     let destinationVC = LoginViewController.loadViewController()
                     self.present(destinationVC, animated: true, completion: nil)
@@ -57,7 +43,37 @@ class MapAndPinViewController: UIViewController {
     }
     
     @objc func reloadWasTapped() {
-        print("reload was tapped")
+            handleReloadTapped(self)
+        }
+//        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
+//            if success && results?.count != 0{
+//
+//            } else {
+//
+//            }
+//        }
+    
+    
+//    func handleReloadStudentLocationResult(completion: @escaping (Bool, Error?) -> Void) {
+//        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
+//            guard let results = results else {
+//                return
+//            }
+//
+//            if success {
+//                studentLocationResults = results
+//
+//            }
+//        }
+//    }
+    
+    func handleReloadTapped(_ viewController: UIViewController) {
+        if let mapController = viewController as? MapViewController {
+           print("map")
+        } else if let PinController = viewController as? PinListViewController {
+            PinController.handleStudentLocationsRespone()
+            print("list")
+        }
     }
     
     @objc func addWasTapped() {

@@ -29,6 +29,7 @@ class PinListViewController: MapAndPinViewController {
                     print(self.studentLocationResults.count)
                     self.tableView.reloadData()
                     self.startActivityIndicator(self.activityIndicator, false)
+                    print("completed")
                 }
             } else {
                 print(error!.localizedDescription)
