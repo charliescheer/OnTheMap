@@ -22,6 +22,9 @@ class PinListViewController: MapAndPinViewController {
     }
     
     func handleStudentLocationsRespone() {
+        startActivityIndicator(activityIndicator, true)
+        studentLocationResults.removeAll()
+        tableView.reloadData()
         OnTheMapAPIClient.getStudentLocations { (success, results, error) in
             if success {
                 if let studentLocationArray = results {
@@ -36,6 +39,11 @@ class PinListViewController: MapAndPinViewController {
             }
         }
     }
+    
+    func clear() {
+        studentLocationResults.removeAll()
+        tableView.reloadData()
+    }
 }
 
 extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -48,6 +56,7 @@ extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(studentLocationResults.count)
         return studentLocationResults.count
         
     }

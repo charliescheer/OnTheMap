@@ -45,34 +45,12 @@ class MapAndPinViewController: UIViewController {
     @objc func reloadWasTapped() {
             handleReloadTapped(self)
         }
-//        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
-//            if success && results?.count != 0{
-//
-//            } else {
-//
-//            }
-//        }
-    
-    
-//    func handleReloadStudentLocationResult(completion: @escaping (Bool, Error?) -> Void) {
-//        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
-//            guard let results = results else {
-//                return
-//            }
-//
-//            if success {
-//                studentLocationResults = results
-//
-//            }
-//        }
-//    }
     
     func handleReloadTapped(_ viewController: UIViewController) {
         if let mapController = viewController as? MapViewController {
            print("map")
         } else if let PinController = viewController as? PinListViewController {
             PinController.handleStudentLocationsRespone()
-            print("list")
         }
     }
     
