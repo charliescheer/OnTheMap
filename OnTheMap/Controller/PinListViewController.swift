@@ -31,7 +31,7 @@ class PinListViewController: MapAndPinViewController {
                     self.startActivityIndicator(self.activityIndicator, false)
                 }
             } else {
-                print(error)
+                print(error!.localizedDescription)
             }
         }
     }

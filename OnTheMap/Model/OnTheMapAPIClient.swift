@@ -134,7 +134,7 @@ class OnTheMapAPIClient {
     
     class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
         let request = URLRequest(url: url)
-        var task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
                     print("no data")
