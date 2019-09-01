@@ -52,17 +52,44 @@
                     <view key="view" contentMode="scaleToFill" id="ev8-ha-vfb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1UE-iU-iAb">
+                                <rect key="frame" x="0.0" y="65" width="414" height="748"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="studentCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="studentCell" id="vV6-bO-vCv">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vV6-bO-vCv" id="sHx-BW-W9B">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="AnP-U9-rs2" id="vNB-BA-rVU"/>
+                                    <outlet property="delegate" destination="AnP-U9-rs2" id="Agv-1v-jlN"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1UE-iU-iAb" firstAttribute="leading" secondItem="284-BH-Pcl" secondAttribute="leading" id="4hw-dI-cCE"/>
+                            <constraint firstItem="1UE-iU-iAb" firstAttribute="bottom" secondItem="284-BH-Pcl" secondAttribute="bottom" id="KQZ-DI-acU"/>
+                            <constraint firstItem="1UE-iU-iAb" firstAttribute="top" secondItem="ev8-ha-vfb" secondAttribute="top" constant="65" id="ZUN-sk-dPQ"/>
+                            <constraint firstItem="1UE-iU-iAb" firstAttribute="trailing" secondItem="284-BH-Pcl" secondAttribute="trailing" id="g5C-Cs-GEu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="284-BH-Pcl"/>
                     </view>
                     <navigationItem key="navigationItem" id="hzi-OX-uxe"/>
                     <connections>
+                        <outlet property="tableView" destination="1UE-iU-iAb" id="lsl-0L-JzB"/>
                         <segue destination="hxQ-XM-kes" kind="presentation" identifier="showAdd" id="TSu-2p-BNi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HB5-nq-gIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1645" y="197"/>
+            <point key="canvasLocation" x="1644.9275362318842" y="196.875"/>
         </scene>
         <!--Map-->
         <scene sceneID="fNs-cN-zp6">
@@ -136,6 +163,6 @@
         <image name="icon_mapview-selected" width="75" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oMe-ir-Uzm"/>
+        <segue reference="TSu-2p-BNi"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class MapAndPinViewController: UIViewController {
     var studentLocationResults: [StudentLocationResults] = []
@@ -14,21 +15,21 @@ class MapAndPinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(OnTheMapAPIClient.Auth.key)
-        print(OnTheMapAPIClient.Auth.sessionId)
+//        print(OnTheMapAPIClient.Auth.key)
+//        print(OnTheMapAPIClient.Auth.sessionId)
         
-        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
-            if success {
-                if let studentLocationArray = results {
-                    self.studentLocationResults = studentLocationArray
-                    print("success")
-                    print(self.studentLocationResults.count)
-                }
-            } else {
-                print("Fail")
-                print(error)
-            }
-        }
+//        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
+//            if success {
+//                if let studentLocationArray = results {
+//                    self.studentLocationResults = studentLocationArray
+//                    print("success")
+//                    print(self.studentLocationResults.count)
+//                }
+//            } else {
+//                print("Fail")
+//                print(error)
+//            }
+//        }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutWasTapped))
         navigationItem.rightBarButtonItems = [
