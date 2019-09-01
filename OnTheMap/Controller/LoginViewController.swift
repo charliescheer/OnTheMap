@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginWasTapped(_ sender: Any) {
-        startActivityIndicator(bool: true)
+        startActivityIndicator(activityIndicator, true)
         OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!, completion: handleLoginResponse(success:error:))
         
     }
@@ -52,24 +52,12 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
             print(success)
-            startActivityIndicator(bool: false)
+            self.startActivityIndicator(self.activityIndicator, false)
             self.transitionToMapAndPinStoryBoard()
         } else {
             print(error!.localizedDescription)
             self.passwordTextField.text = ""
         }
-    }
-    
-    func startActivityIndicator(bool: Bool) {
-        if bool {
-            activityIndicator.startAnimating()
-        } else {
-            activityIndicator.stopAnimating()
-        }
-        loginButton.isEnabled = !bool
-        signUpButton.isEnabled = !bool
-        usernameTextField.isEnabled = !bool
-        passwordTextField.isEnabled = !bool
     }
 }
 
