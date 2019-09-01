@@ -10,11 +10,15 @@ import UIKit
 
 class PinListViewController: MapAndPinViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        startActivityIndicator(activityIndicator, true)
         handleStudentLocationsRespone()
         print("Pin List View")
+        
+        
     }
     
     func handleStudentLocationsRespone() {
@@ -22,12 +26,11 @@ class PinListViewController: MapAndPinViewController {
             if success {
                 if let studentLocationArray = results {
                     self.studentLocationResults = studentLocationArray
-                    print("success")
                     print(self.studentLocationResults.count)
                     self.tableView.reloadData()
+                    self.startActivityIndicator(self.activityIndicator, false)
                 }
             } else {
-                print("Fail")
                 print(error)
             }
         }
@@ -36,17 +39,20 @@ class PinListViewController: MapAndPinViewController {
 
 extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell.init(style: .default, reuseIdentifier: constants.cellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellIdentifier, for: indexPath) as! PinListCell
         let student = studentLocationResults[indexPath.row]
-        cell.textLabel?.text = student.firstName + " " + student.lastName
-        
-        print(studentLocationResults[indexPath.row].firstName)
+        cell.studentNameLabel.text = student.firstName + " " + student.lastName
+        cell.studentLocationLabel.text = student.mediaURL
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentLocationResults.count
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }
 
