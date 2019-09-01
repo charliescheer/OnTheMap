@@ -17,9 +17,14 @@ extension UIViewController {
         }
         
         self.isEditing = !bool
-//        loginButton.isEnabled = !bool
-//        signUpButton.isEnabled = !bool
-//        usernameTextField.isEnabled = !bool
-//        passwordTextField.isEnabled = !bool
+    }
+    
+    func displayUIAlert(titled title: String, withMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction.init(title: "Okay", style: .cancel, handler: nil)
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
     }
 }

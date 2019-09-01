@@ -31,7 +31,7 @@ class OnTheMapAPIClient {
             case .signup: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             case .logout: return Endpoints.baseURL + "session"
             case .getUserData: return Endpoints.baseURL + "users/" + Auth.key
-            case .getStudentLocation: return Endpoints.baseURL + "StudentLocation" + "?limit=25"
+            case .getStudentLocation: return Endpoints.baseURL + "StudentLocation" + "?limit=100"
             }
         }
         

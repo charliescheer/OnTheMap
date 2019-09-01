@@ -54,6 +54,21 @@ extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let student = studentLocationResults[indexPath.row]
+        
+        guard let url = URL(string: student.mediaURL) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            displayUIAlert(titled: "URL Not Valid", withMessage: "Can not open URL for selected student")
+        }
+        
+    }
 }
 
 extension PinListViewController {
