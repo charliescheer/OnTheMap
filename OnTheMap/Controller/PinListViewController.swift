@@ -14,11 +14,8 @@ class PinListViewController: MapAndPinViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startActivityIndicator(activityIndicator, true)
         handleStudentLocationsRespone()
         print("Pin List View")
-        
-        
     }
     
     func handleStudentLocationsRespone() {
@@ -29,10 +26,8 @@ class PinListViewController: MapAndPinViewController {
             if success {
                 if let studentLocationArray = results {
                     self.studentLocationResults = studentLocationArray
-                    print(self.studentLocationResults.count)
                     self.tableView.reloadData()
                     self.startActivityIndicator(self.activityIndicator, false)
-                    print("completed")
                 }
             } else {
                 print(error!.localizedDescription)
@@ -40,10 +35,6 @@ class PinListViewController: MapAndPinViewController {
         }
     }
     
-    func clear() {
-        studentLocationResults.removeAll()
-        tableView.reloadData()
-    }
 }
 
 extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -56,7 +47,6 @@ extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(studentLocationResults.count)
         return studentLocationResults.count
         
     }

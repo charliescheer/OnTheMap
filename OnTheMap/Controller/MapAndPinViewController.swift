@@ -12,9 +12,10 @@ import MapKit
 class MapAndPinViewController: UIViewController {
     var studentLocationResults: [StudentLocationResults] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
 //        print(OnTheMapAPIClient.Auth.key)
 //        print(OnTheMapAPIClient.Auth.sessionId)
         
