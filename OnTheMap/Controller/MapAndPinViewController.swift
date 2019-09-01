@@ -7,28 +7,29 @@
 //
 
 import UIKit
+import MapKit
 
 class MapAndPinViewController: UIViewController {
+    var studentLocationResults: [StudentLocationResults] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(OnTheMapAPIClient.Auth.key)
-        print(OnTheMapAPIClient.Auth.sessionId)
+
+//        print(OnTheMapAPIClient.Auth.key)
+//        print(OnTheMapAPIClient.Auth.sessionId)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutWasTapped))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWasTapped)),
-            UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadWasTapped))
+            UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.reloadWasTapped)),
         ]
     }
-    
     
     @objc func logoutWasTapped() {
         OnTheMapAPIClient.Logout { (success, error) in
             if success {
                 print("Success")
-//                self.dismiss(animated: true, completion: nil)
                 DispatchQueue.main.async {
                     let destinationVC = LoginViewController.loadViewController()
                     self.present(destinationVC, animated: true, completion: nil)
@@ -43,7 +44,15 @@ class MapAndPinViewController: UIViewController {
     }
     
     @objc func reloadWasTapped() {
-        print("reload was tapped")
+            handleReloadTapped(self)
+        }
+    
+    func handleReloadTapped(_ viewController: UIViewController) {
+        if let mapController = viewController as? MapViewController {
+           print("map")
+        } else if let PinController = viewController as? PinListViewController {
+            PinController.handleStudentLocationsRespone()
+        }
     }
     
     @objc func addWasTapped() {
