@@ -9,6 +9,10 @@
 import Foundation
 
 struct StudentLocation: Codable {
+    let results: [StudentLocationResults]
+}
+
+struct StudentLocationResults: Codable {
     let objectId: String
     let uniqueKey: String
     let firstName: String

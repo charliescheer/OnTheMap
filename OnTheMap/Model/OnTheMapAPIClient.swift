@@ -31,39 +31,12 @@ class OnTheMapAPIClient {
             case .signup: return "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com/authenticated"
             case .logout: return Endpoints.baseURL + "session"
             case .getUserData: return Endpoints.baseURL + "users/" + Auth.key
-            case .getStudentLocation: return Endpoints.baseURL + "StudentLocation"
+            case .getStudentLocation: return Endpoints.baseURL + "StudentLocation" + "?limit=100"
             }
         }
         
         var url: URL {
             return URL(string: stringValue)!
-        }
-    }
-    
-    class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-        let sessionRequest = UdacitySessionRequest(username: username, password: password)
-        
-        makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
-            if let response = response {
-                Auth.sessionId = response.session.sessionId
-                Auth.key = response.account.key
-                
-                DispatchQueue.main.async {
-                    completion(true, nil)
-                }
-                
-                let encoder = PropertyListEncoder()
-                do {
-                    let data = try encoder.encode(response)
-                    UserDefaults.standard.set(data, forKey: "sessionId")
-                } catch {
-                    print(error.localizedDescription)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion(false, nil)
-                }
-            }
         }
     }
     
@@ -159,6 +132,70 @@ class OnTheMapAPIClient {
         task.resume()
     }
     
+    class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+        let request = URLRequest(url: url)
+        var task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    print("no data")
+                    completion(nil, error)
+                }
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            do {
+                let response = try decoder.decode(ResponseType.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(response, nil)
+                }
+            } catch {
+                do {
+                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+                
+            }
+        }
+        task.resume()
+    }
+    
+
+    
+    class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+        let sessionRequest = UdacitySessionRequest(username: username, password: password)
+        
+        makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
+            if let response = response {
+                Auth.sessionId = response.session.sessionId
+                Auth.key = response.account.key
+                
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+                
+                let encoder = PropertyListEncoder()
+                do {
+                    let data = try encoder.encode(response)
+                    UserDefaults.standard.set(data, forKey: "sessionId")
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(false, nil)
+                }
+            }
+        }
+    }
     
     class func Logout(completion: @escaping (Bool, Error?) -> Void) {
         taskForDeleteRequest(url: OnTheMapAPIClient.Endpoints.logout.url, responseType: UdacityAPILogoutResponse.self) { (response, error) in
@@ -171,6 +208,20 @@ class OnTheMapAPIClient {
             } else {
                 DispatchQueue.main.async {
                     completion(false, error)
+                }
+            }
+        }
+    }
+    
+    class func getStudentLocations(completion: @escaping (Bool, [StudentLocationResults]?, Error?) -> Void) {
+        taskForGetRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocation.self) { (response, error) in
+            if let response = response {
+                DispatchQueue.main.async {
+                    completion(true, response.results, nil)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(false, nil, nil)
                 }
             }
         }
