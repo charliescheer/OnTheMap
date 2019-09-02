@@ -29,14 +29,24 @@ class AddPinMapViewController: UIViewController{
     }
     
     override func viewDidLoad() {
-        if request != nil {
-            print("has request")
+        guard let request = request else {
+            return
         }
-        print(request?.longitude)
-        print(request?.latitude)
-        if let request = request {
-            mapView.addAnnotation(createPinForPostingFromRequest(request))
-        }
+        
+        //TO DO handle the force unwrapping
+        let longitude = CLLocationDegrees(exactly: request.longitude)
+        let latitude = CLLocationDegrees(exactly: request.latitude)
+        let region = MKCoordinateRegion.init(
+            center: CLLocationCoordinate2D(
+                latitude: latitude!,
+                longitude: longitude!),
+            latitudinalMeters: 5000,
+            longitudinalMeters: 5000)
+        
+        mapView.region = region
+        
+        mapView.addAnnotation(createPinForPostingFromRequest(request))
+        
         mapView.reloadInputViews()
     }
     
