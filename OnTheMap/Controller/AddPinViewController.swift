@@ -8,9 +8,11 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class AddPinViewController: UIViewController, UITextFieldDelegate {
     let textFieldDelegate = CustomTextFieldDelegate()
+    var setLocation: CLLocation?
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var urlTextField: UITextField!
@@ -23,35 +25,67 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         findLocationButton.clipsToBounds = true
         locationTextField.delegate = textFieldDelegate
         urlTextField.delegate = textFieldDelegate
+        locationTextField.text = "1 Infinite Loop, CA, USA"
+        urlTextField.text = "https://udacity.com/"
         
     }
+    //TO DO Go through the flow of converting the string to location and see if there are too many optionals for the location.
     
     @IBAction func findLocationWasTapped(_ sender: Any) {
         
-        let location = convertStringToLocation(stringText: locationTextField.text!)
-        let url = convertStringtoURL(string: urlTextField.text!)
-        
-        createPostStudentLocationRequest(url: url!, location: location)
-        
-//        let destinationVC = AddPinMapViewController.loadViewController()
-//        navigationController?.pushViewController(destinationVC, animated: true)
-        
+        convertStringToLocation(stringText: locationTextField.text!) { (location, error) in
+            self.setLocation = location
+            
+            guard self.setLocation != nil else {
+                print("no location")
+                return
+            }
+            
+            guard let url = self.convertStringtoURL(string: self.urlTextField.text!) else {
+                print("no url")
+                return
+            }
+            
+            self.createPostStudentLocationRequest(url: url, location: self.setLocation!)
+            
+        }
     }
     
-    func convertStringToLocation(stringText: String) -> CLLocation {
+    func convertStringToLocation(stringText: String, completion: @escaping (CLLocation?, Error?) -> Void) {
         let geoCoder = CLGeocoder()
-        var convertedLocation = CLLocation()
         
         geoCoder.geocodeAddressString(stringText) { (placemarks, error) in
             guard
                 let placemarks = placemarks,
                 let location = placemarks.first?.location else {
                     self.displayUIAlert(titled: "Couldn't Find Location", withMessage: error?.localizedDescription ?? "")
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                    
                     return
             }
-            convertedLocation = location
+            
+            DispatchQueue.main.async {
+                print(location)
+                completion(location, nil)
+            }
+            
+            
         }
-        return convertedLocation
+    }
+    
+    
+    func handleLocationConversion(location: CLLocation?, error: Error?) {
+        guard let location = location else {
+            print("couldn't unwrap location")
+            print(error)
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.setLocation = location
+        }
     }
     
     func convertStringtoURL(string: String) -> URL? {
@@ -83,6 +117,9 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                                                      latitude: Float(location.coordinate.latitude)
             )
             
+            print(request.latitude)
+            print(request.longitude)
+            
             DispatchQueue.main.async {
                 let destinvationVC = AddPinMapViewController.loadViewController()
                 destinvationVC.request = request
@@ -91,7 +128,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-
 
 
 extension AddPinViewController: StoryboardLoadable {

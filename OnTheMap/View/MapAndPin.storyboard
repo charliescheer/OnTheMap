@@ -277,16 +277,36 @@
                                     <outlet property="delegate" destination="cSi-EI-NbV" id="hWB-cy-LFR"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weT-uX-51d">
+                                <rect key="frame" x="16" y="772" width="382" height="40"/>
+                                <color key="backgroundColor" red="0.31437125799999999" green="0.69035357239999995" blue="0.87453544139999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="rJ7-B1-EnF"/>
+                                </constraints>
+                                <state key="normal" title="Set Location">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="findLocationWasTapped:" destination="hxQ-XM-kes" eventType="touchUpInside" id="2bs-jT-Z2t"/>
+                                    <action selector="setLocationWasTapped:" destination="cSi-EI-NbV" eventType="touchUpInside" id="Jew-Yb-O0B"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="top" secondItem="Mc9-48-64V" secondAttribute="top" id="0YS-Ps-can"/>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="bottom" secondItem="Mc9-48-64V" secondAttribute="bottom" id="8L9-HI-xiL"/>
+                            <constraint firstItem="Mc9-48-64V" firstAttribute="bottom" secondItem="weT-uX-51d" secondAttribute="bottom" constant="50" id="IXY-rv-SdJ"/>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="trailing" secondItem="Mc9-48-64V" secondAttribute="trailing" id="LLx-LH-cHw"/>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="leading" secondItem="Mc9-48-64V" secondAttribute="leading" id="dg1-Hs-hbE"/>
+                            <constraint firstItem="weT-uX-51d" firstAttribute="leading" secondItem="Mc9-48-64V" secondAttribute="leading" constant="16" id="gVh-Hb-D0w"/>
+                            <constraint firstItem="Mc9-48-64V" firstAttribute="trailing" secondItem="weT-uX-51d" secondAttribute="trailing" constant="16" id="y5v-pL-Z7w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mc9-48-64V"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="b3r-bn-KhO" id="Fgc-4q-DDJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nV4-i4-QIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
