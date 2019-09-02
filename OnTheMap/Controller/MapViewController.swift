@@ -79,6 +79,7 @@ extension MapViewController: MKMapViewDelegate {
             pinView!.canShowCallout = true
             pinView!.tintColor = UIColor.red
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            pinView!.rightCalloutAccessoryView!.isHidden = true
         } else {
             pinView!.annotation = annotation
         }
