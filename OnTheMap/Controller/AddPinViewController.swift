@@ -27,7 +27,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         urlTextField.delegate = textFieldDelegate
         locationTextField.text = "1 Infinite Loop, CA, USA"
         urlTextField.text = "https://udacity.com/"
-        
     }
     //TO DO Go through the flow of converting the string to location and see if there are too many optionals for the location.
     
@@ -50,6 +49,11 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             
         }
     }
+    
+    @IBAction func cancelWasTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     func convertStringToLocation(stringText: String, completion: @escaping (CLLocation?, Error?) -> Void) {
         let geoCoder = CLGeocoder()

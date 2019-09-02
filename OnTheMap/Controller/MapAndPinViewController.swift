@@ -58,8 +58,7 @@ class MapAndPinViewController: UIViewController {
     }
     
     @objc func addWasTapped() {
-        let destination = AddPinViewController.loadViewController()
-        self.navigationController?.pushViewController(destination, animated: true)
+        performSegue(withIdentifier: constants.addSegue, sender: self)
     }
 
     
