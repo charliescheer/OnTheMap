@@ -20,6 +20,18 @@ class MapViewController: MapAndPinViewController {
         super.viewDidAppear(animated)
         handleStudentLocationResponse()
         
+        //TO DO handle the force unwrapping
+//        let longitude = CLLocationDegrees(exactly: studentLocationResults[1].longitude)
+//        let latitude = CLLocationDegrees(exactly: studentLocationResults[1].latitude)
+//        let region = MKCoordinateRegion.init(
+//            center: CLLocationCoordinate2D(
+//                latitude: latitude!,
+//                longitude: longitude!),
+//            latitudinalMeters: 15000,
+//            longitudinalMeters: 15000)
+//
+//        mapView.region = region
+//
         print("Map View")
         
         
@@ -32,11 +44,27 @@ class MapViewController: MapAndPinViewController {
         OnTheMapAPIClient.getStudentLocations { (success, results, error) in
             if success {
                 if let studentLocationArray = results {
-                    self.studentLocationResults = studentLocationArray
-                    self.addPinsFromStudentArrayToMap()
-                    
-                    self.mapView.addAnnotations(self.annotations)
-                    self.startActivityIndicator(self.activityIndicator, false)
+                    DispatchQueue.main.async {
+                        self.studentLocationResults = studentLocationArray
+                        self.addPinsFromStudentArrayToMap()
+                        
+                        self.mapView.addAnnotations(self.annotations)
+                        
+                        //TO DO handle the force unwrapping
+                        let randomNumber = Int.random(in: 0...self.studentLocationResults.count)
+                        let longitude = CLLocationDegrees(exactly: self.studentLocationResults[randomNumber].longitude)
+                        let latitude = CLLocationDegrees(exactly: self.studentLocationResults[randomNumber].latitude)
+                        let region = MKCoordinateRegion.init(
+                            center: CLLocationCoordinate2D(
+                                latitude: latitude!,
+                                longitude: longitude!),
+                            latitudinalMeters: 3000000,
+                            longitudinalMeters: 3000000)
+                        
+                        self.mapView.region = region
+                        
+                        self.startActivityIndicator(self.activityIndicator, false)
+                    }
                 }
             } else {
                 print(error!.localizedDescription)
