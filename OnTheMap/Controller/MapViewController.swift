@@ -89,7 +89,18 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("pin was tapped")
         if control == view.rightCalloutAccessoryView {
-            print(view.annotation?.title)
+            guard let annotation = view.annotation else {
+                return
+            }
+            guard let url = URL(string: annotation.subtitle!!) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else {
+                displayUIAlert(titled: "URL Not Valid", withMessage: "Can not open URL for selected student")
+            }
         }
     }
 }
