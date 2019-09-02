@@ -20,6 +20,10 @@ class MapViewController: MapAndPinViewController {
         super.viewDidAppear(animated)
         handleStudentLocationResponse()
         
+        if let user = userLocation {
+            
+        }
+        
         print("Map View")
         
         

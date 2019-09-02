@@ -333,13 +333,26 @@ class OnTheMapAPIClient {
                 }
             } else {
                 DispatchQueue.main.async {
+                    let encoder = JSONEncoder()
+                    do {
+                        let encodedData = try encoder.encode(body)
+                        UserDefaults.standard.set(encodedData, forKey: constants.loggedInUserLocation)
+                    } catch {
+                        print(error)
+                    }
                     completion(true, nil)
-                    print(response?.objectId)
+                    print(response?.objectId ?? "couldn't get objectId")
                 }
             }
             
-            print(response?.objectId)
+            print(response?.objectId ?? "couldn't get objectId")
         }
+    }
+}
+
+extension OnTheMapAPIClient {
+    enum constants {
+        static let loggedInUserLocation = "loggedUserLocation"
     }
 }
 

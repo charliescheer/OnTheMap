@@ -11,13 +11,14 @@ import MapKit
 
 class MapAndPinViewController: UIViewController {
     var studentLocationResults: [StudentLocationResults] = []
+    var userLocation: PostStudentLocationRequest?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        print(OnTheMapAPIClient.Auth.key)
-//        print(OnTheMapAPIClient.Auth.sessionId)
+        print("userId Key \(OnTheMapAPIClient.Auth.key)")
+        print("session Id \(OnTheMapAPIClient.Auth.sessionId)")
         
         
         
@@ -26,6 +27,11 @@ class MapAndPinViewController: UIViewController {
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addWasTapped)),
             UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.reloadWasTapped)),
         ]
+        
+        if let location = getLoggedInUserLocationFromDefaults() {
+            userLocation = location
+        }
+        
     }
     
     @objc func logoutWasTapped() {
@@ -57,11 +63,32 @@ class MapAndPinViewController: UIViewController {
         }
     }
     
+    
     @objc func addWasTapped() {
         performSegue(withIdentifier: constants.addSegue, sender: self)
     }
 
+    func getLoggedInUserLocationFromDefaults() -> PostStudentLocationRequest? {
+        var studentLocation: PostStudentLocationRequest?
     
+        let storedData = UserDefaults.standard.data(forKey: OnTheMapAPIClient.constants.loggedInUserLocation)
+        
+        guard let data = storedData else {
+            print("Couldn't retrieve data")
+            return nil
+        }
+        
+        let decoder = JSONDecoder()
+        do {
+            let decodedUserLocation = try decoder.decode(PostStudentLocationRequest.self, from: data)
+            
+            studentLocation = decodedUserLocation
+        } catch {
+            print(error)
+        }
+    
+        return studentLocation
+    }
 }
 
 
