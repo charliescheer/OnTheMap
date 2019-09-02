@@ -108,7 +108,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     func createPostStudentLocationRequest(url: URL, location: CLLocation) {
         OnTheMapAPIClient.getLoggedinUserData { (success, user, error) in
             guard let user = user else {
-                print("Error....")
+                self.displayUIAlert(titled: "Couldn't Post Location", withMessage: error?.localizedDescription ?? "Generic Error")
                 return
             }
             
@@ -124,11 +124,11 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             print(request.latitude)
             print(request.longitude)
             
-            DispatchQueue.main.async {
-                let destinvationVC = AddPinMapViewController.loadViewController()
-                destinvationVC.request = request
-                self.navigationController?.pushViewController(destinvationVC, animated: true)
-            }
+            
+            let destinvationVC = AddPinMapViewController.loadViewController()
+            destinvationVC.request = request
+            self.navigationController?.pushViewController(destinvationVC, animated: true)
+            
         }
     }
 }

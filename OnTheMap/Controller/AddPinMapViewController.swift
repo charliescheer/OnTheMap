@@ -23,9 +23,21 @@ class AddPinMapViewController: UIViewController{
                     print("fail")
                 }
                 
-                self.navigationController?.popToRootViewController(animated: true)
+                self.transitionToMapAndPinStoryBoard()
             }
         }
+    }
+    
+    func transitionToMapAndPinStoryBoard() {
+        let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
+        
+        guard let destination = storyboard.instantiateInitialViewController() else {
+            print("failed to instantiate view controller")
+            return
+        }
+        
+        self.present(destination, animated: true, completion: nil)
+        
     }
     
     override func viewDidLoad() {
