@@ -156,29 +156,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rfz-L1-c0M">
-                                <rect key="frame" x="184" y="433" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="tempButtonWasTapped:" destination="h3e-Bg-iRh" eventType="touchUpInside" id="mju-FB-Q1V"/>
-                                </connections>
-                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oyr-ru-Rkx">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uGi-bd-ujl">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Rfz-L1-c0M" firstAttribute="centerY" secondItem="Hn2-nc-faz" secondAttribute="centerY" id="6v3-iR-aPe"/>
-                            <constraint firstItem="Rfz-L1-c0M" firstAttribute="centerX" secondItem="Hn2-nc-faz" secondAttribute="centerX" id="RgC-GQ-pRf"/>
+                            <constraint firstItem="oyr-ru-Rkx" firstAttribute="bottom" secondItem="9bW-12-H2J" secondAttribute="bottom" id="3Fh-wN-LIs"/>
+                            <constraint firstItem="uGi-bd-ujl" firstAttribute="centerY" secondItem="Hn2-nc-faz" secondAttribute="centerY" id="Uic-An-Mmy"/>
+                            <constraint firstItem="oyr-ru-Rkx" firstAttribute="trailing" secondItem="9bW-12-H2J" secondAttribute="trailing" id="UqP-1L-81f"/>
+                            <constraint firstItem="uGi-bd-ujl" firstAttribute="centerX" secondItem="Hn2-nc-faz" secondAttribute="centerX" id="be8-LM-Oun"/>
+                            <constraint firstItem="oyr-ru-Rkx" firstAttribute="leading" secondItem="9bW-12-H2J" secondAttribute="leading" id="xid-5w-odV"/>
+                            <constraint firstItem="oyr-ru-Rkx" firstAttribute="top" secondItem="9bW-12-H2J" secondAttribute="top" id="yU2-xJ-K99"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9bW-12-H2J"/>
                     </view>
                     <navigationItem key="navigationItem" id="cEm-HH-f4j"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="uGi-bd-ujl" id="cKD-sA-fKT"/>
+                        <outlet property="mapView" destination="oyr-ru-Rkx" id="kJq-AB-11o"/>
                         <segue destination="hxQ-XM-kes" kind="presentation" identifier="showAdd" id="oMe-ir-Uzm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CY7-K2-1z9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1645" y="-615"/>
+            <point key="canvasLocation" x="1644.9275362318842" y="-615.40178571428567"/>
         </scene>
         <!--Add Location-->
         <scene sceneID="DkU-fA-Pvc">
@@ -204,6 +209,6 @@
         <image name="icon_pin" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TSu-2p-BNi"/>
+        <segue reference="oMe-ir-Uzm"/>
     </inferredMetricsTieBreakers>
 </document>
