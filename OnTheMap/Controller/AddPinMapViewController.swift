@@ -15,7 +15,15 @@ class AddPinMapViewController: UIViewController{
     @IBOutlet weak var mapView: MKMapView!
     
     @IBAction func setLocationWasTapped(_ sender: Any) {
-        
+        if let request = request {
+            OnTheMapAPIClient.postLoggedInUserLocation(body: request) { (success, error) in
+                if success {
+                    print("success")
+                } else {
+                    print("fail")
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {

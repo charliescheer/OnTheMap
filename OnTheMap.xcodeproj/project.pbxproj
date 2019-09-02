@@ -30,6 +30,7 @@
 		BA8AAC62231C7625000F6D75 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC61231C7625000F6D75 /* UIViewController+Helpers.swift */; };
 		BA8AAC66231CAA37000F6D75 /* AddPinMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC65231CAA37000F6D75 /* AddPinMapViewController.swift */; };
 		BA8AAC68231CCEE3000F6D75 /* PostStudentLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC67231CCEE3000F6D75 /* PostStudentLocationRequest.swift */; };
+		BA8AAC6A231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC69231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		BA8AAC61231C7625000F6D75 /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		BA8AAC65231CAA37000F6D75 /* AddPinMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinMapViewController.swift; sourceTree = "<group>"; };
 		BA8AAC67231CCEE3000F6D75 /* PostStudentLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStudentLocationRequest.swift; sourceTree = "<group>"; };
+		BA8AAC69231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIPostLocationResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				BA8AAC512318ABA0000F6D75 /* UdacityAPIResponse.swift */,
 				BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */,
 				BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */,
+				BA8AAC69231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				BA8AAC502318A164000F6D75 /* UdacitySessionRequest.swift in Sources */,
 				BA8AAC5E231A0D71000F6D75 /* StudentLocation.swift in Sources */,
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
+				BA8AAC6A231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift in Sources */,
 				BA8AAC562319020E000F6D75 /* CustomTextFieldDelegate.swift in Sources */,
 				BA8AAC68231CCEE3000F6D75 /* PostStudentLocationRequest.swift in Sources */,
 				BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */,

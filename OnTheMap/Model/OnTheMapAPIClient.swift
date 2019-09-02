@@ -24,6 +24,7 @@ class OnTheMapAPIClient {
         case logout
         case getUserData
         case getStudentLocation
+        case postStudentLocation
         
         var stringValue: String {
             switch self {
@@ -32,6 +33,7 @@ class OnTheMapAPIClient {
             case .logout: return Endpoints.baseURL + "session"
             case .getUserData: return Endpoints.baseURL + "users/" + Auth.key
             case .getStudentLocation: return Endpoints.baseURL + "StudentLocation" + "?limit=100"
+            case .postStudentLocation: return Endpoints.baseURL + "StudentLocation"
             }
         }
         
@@ -41,7 +43,7 @@ class OnTheMapAPIClient {
     }
     
     
-    class func makePostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, headers: [String], body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void ) {
+    class func makePostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, headers: [String], body: RequestType, secureReturn: Bool, completion: @escaping (ResponseType?, Error?) -> Void ) {
         
         //Define the URL Request
         var request = URLRequest(url: url)
@@ -61,24 +63,41 @@ class OnTheMapAPIClient {
         
         //Begin URL Session with created Request
         let session = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            var mutableData = Data()
             //Check to make sure the data returned is not nil and is not empty
             //Remove the first 5 characters from data per Udacity security spac
             //Decode data and return the resonse to the completion handler
-            guard let data = removeSecurityDataFromResponseData(data) else {
-                print("data was nil")
-                return
+            if secureReturn {
+                guard let tempData = removeSecurityDataFromResponseData(data) else {
+                    DispatchQueue.main.async {
+                        print("no data")
+                        completion(nil, error)
+                    }
+                    return
+                }
+                mutableData = tempData
+            } else {
+                guard let tempData = data else {
+                    DispatchQueue.main.async {
+                        print("no data")
+                        completion(nil, error)
+                    }
+                    return
+                }
+                mutableData = tempData
             }
+    
             
             let decoder = JSONDecoder()
             
             do {
-                let decodedData = try decoder.decode(ResponseType.self, from: data)
+                let decodedData = try decoder.decode(ResponseType.self, from: mutableData)
                 DispatchQueue.main.async {
                     completion(decodedData, nil)
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: data)
+                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: mutableData)
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
@@ -187,7 +206,7 @@ class OnTheMapAPIClient {
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let sessionRequest = UdacitySessionRequest(username: username, password: password)
         
-        makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest) { (response, error) in
+        makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest, secureReturn: true) { (response, error) in
             if let response = response {
                 Auth.sessionId = response.session.sessionId
                 Auth.key = response.account.key
@@ -301,6 +320,25 @@ class OnTheMapAPIClient {
             
             print(user.firstName)
             completion(true, response, nil)
+        }
+    }
+    
+    class func postLoggedInUserLocation(body: PostStudentLocationRequest, completion: @escaping (Bool, Error?) -> Void) {
+        
+        makePostRequest(url: Endpoints.postStudentLocation.url, responseType: UdacityAPIPostLocationResponse.self, headers: ["Content-Type"], body: body, secureReturn: false) { (response, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                    return
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                    print(response?.objectId)
+                }
+            }
+            
+            print(response?.objectId)
         }
     }
 }
