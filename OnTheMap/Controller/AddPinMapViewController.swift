@@ -22,6 +22,8 @@ class AddPinMapViewController: UIViewController{
                 } else {
                     print("fail")
                 }
+                
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
