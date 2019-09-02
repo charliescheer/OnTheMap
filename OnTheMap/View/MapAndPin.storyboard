@@ -214,9 +214,12 @@
                                     <outlet property="delegate" destination="hxQ-XM-kes" id="fuo-Fq-wWu"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HH-TD-gUN">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6HH-TD-gUN">
                                 <rect key="frame" x="16" y="354" width="382" height="40"/>
                                 <color key="backgroundColor" red="0.31437125799999999" green="0.69035357239999995" blue="0.87453544139999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Uey-16-bsg"/>
+                                </constraints>
                                 <state key="normal" title="Find Location">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -253,7 +256,7 @@
                         <outlet property="findLocationButton" destination="6HH-TD-gUN" id="SHV-xk-eHs"/>
                         <outlet property="locationTextField" destination="Y79-9i-3ML" id="IpS-dm-Mrw"/>
                         <outlet property="urlTextField" destination="k5g-Tg-T5B" id="A7L-Sy-I3T"/>
-                        <segue destination="cSi-EI-NbV" kind="presentation" id="r0p-BF-wdU"/>
+                        <segue destination="cSi-EI-NbV" kind="presentation" identifier="toAddMapVC" id="r0p-BF-wdU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tmI-sd-yAa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -299,6 +302,6 @@
         <image name="icon_world" width="52" height="67"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oMe-ir-Uzm"/>
+        <segue reference="TSu-2p-BNi"/>
     </inferredMetricsTieBreakers>
 </document>

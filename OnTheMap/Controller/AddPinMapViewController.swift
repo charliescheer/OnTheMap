@@ -10,8 +10,14 @@ import UIKit
 import MapKit
 
 class AddPinMapViewController: UIViewController, MKMapViewDelegate {
+    var request: PostStudentLocationRequest?
     
     
+    override func viewDidLoad() {
+        if request != nil {
+            print("has request")
+        }
+    }
 }
 
 extension AddPinMapViewController: StoryboardLoadable {

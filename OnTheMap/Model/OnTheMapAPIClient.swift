@@ -132,27 +132,41 @@ class OnTheMapAPIClient {
         task.resume()
     }
     
-    class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, secureReturn: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
         let request = URLRequest(url: url)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    print("no data")
-                    completion(nil, error)
+            var mutableData = Data()
+            
+            if secureReturn {
+                guard let tempData = removeSecurityDataFromResponseData(data) else {
+                    DispatchQueue.main.async {
+                        print("no data")
+                        completion(nil, error)
+                    }
+                    return
                 }
-                return
+                mutableData = tempData
+            } else {
+                guard let tempData = data else {
+                    DispatchQueue.main.async {
+                        print("no data")
+                        completion(nil, error)
+                    }
+                    return
+                }
+                mutableData = tempData
             }
             
             let decoder = JSONDecoder()
             do {
-                let response = try decoder.decode(ResponseType.self, from: data)
+                let response = try decoder.decode(ResponseType.self, from: mutableData)
                 
                 DispatchQueue.main.async {
                     completion(response, nil)
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: data)
+                    let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: mutableData)
                     
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
@@ -214,7 +228,7 @@ class OnTheMapAPIClient {
     }
     
     class func getStudentLocations(completion: @escaping (Bool, [StudentLocationResults]?, Error?) -> Void) {
-        taskForGetRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocation.self) { (response, error) in
+        taskForGetRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocation.self, secureReturn: false) { (response, error) in
             if let response = response {
                 DispatchQueue.main.async {
                     completion(true, response.results, nil)
@@ -246,6 +260,7 @@ class OnTheMapAPIClient {
         return data.subdata(in: range)
     }
     
+    //Checks user defaults to see if there is saved data for the logged in user
     class func authSessionIdIsSavedToUserDefaults() -> Bool {
         guard (UserDefaults.standard.data(forKey: "sessionId") != nil) else {
             print("No Saved Data")
@@ -276,40 +291,17 @@ class OnTheMapAPIClient {
         }
     }
     
-    
-    class func getLoggedInUserData(url: URL, userId: String) {
-        //Check to make sure the saved UserId is not empty
-        guard userId.count != 0 else {
-            print("no user id")
-            return
-        }
-        print(userId)
-        print(url)
-
-        let request = URLRequest(url: url)
-        print(request)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            guard let data = removeSecurityDataFromResponseData(data) else {
-                print("data modification failed")
+    class func getLoggedinUserData(completion: @escaping (Bool, User?, Error?) -> Void) {
+        taskForGetRequest(url: Endpoints.getUserData.url, responseType: User.self, secureReturn: true) { (response, error) in
+            guard let user = response else {
+                print("Could not access user info")
+                completion(false, nil, error)
                 return
             }
-        
-            print(response)
-            let decoder = JSONDecoder()
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-            
-            do {
-                let loggedInUser = try decoder.decode(User.self, from: data)
-                print(loggedInUser.firstName + " " + loggedInUser.lastName)
-            } catch {
-                print(error)
-            }
-            
+            print(user.firstName)
+            completion(true, response, nil)
         }
-        task.resume()
     }
 }
 

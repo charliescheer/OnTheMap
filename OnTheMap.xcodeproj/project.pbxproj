@@ -29,6 +29,7 @@
 		BA8AAC60231C7167000F6D75 /* PinListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC5F231C7167000F6D75 /* PinListCell.swift */; };
 		BA8AAC62231C7625000F6D75 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC61231C7625000F6D75 /* UIViewController+Helpers.swift */; };
 		BA8AAC66231CAA37000F6D75 /* AddPinMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC65231CAA37000F6D75 /* AddPinMapViewController.swift */; };
+		BA8AAC68231CCEE3000F6D75 /* PostStudentLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC67231CCEE3000F6D75 /* PostStudentLocationRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		BA8AAC5F231C7167000F6D75 /* PinListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinListCell.swift; sourceTree = "<group>"; };
 		BA8AAC61231C7625000F6D75 /* UIViewController+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Helpers.swift"; sourceTree = "<group>"; };
 		BA8AAC65231CAA37000F6D75 /* AddPinMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPinMapViewController.swift; sourceTree = "<group>"; };
+		BA8AAC67231CCEE3000F6D75 /* PostStudentLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStudentLocationRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8AAC4F2318A164000F6D75 /* UdacitySessionRequest.swift */,
+				BA8AAC67231CCEE3000F6D75 /* PostStudentLocationRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				BA8AAC5E231A0D71000F6D75 /* StudentLocation.swift in Sources */,
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
 				BA8AAC562319020E000F6D75 /* CustomTextFieldDelegate.swift in Sources */,
+				BA8AAC68231CCEE3000F6D75 /* PostStudentLocationRequest.swift in Sources */,
 				BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */,
 				BA8AAC5C2319DC27000F6D75 /* User.swift in Sources */,
 				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
