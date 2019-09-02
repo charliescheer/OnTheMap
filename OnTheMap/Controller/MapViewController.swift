@@ -20,18 +20,6 @@ class MapViewController: MapAndPinViewController {
         super.viewDidAppear(animated)
         handleStudentLocationResponse()
         
-        //TO DO handle the force unwrapping
-//        let longitude = CLLocationDegrees(exactly: studentLocationResults[1].longitude)
-//        let latitude = CLLocationDegrees(exactly: studentLocationResults[1].latitude)
-//        let region = MKCoordinateRegion.init(
-//            center: CLLocationCoordinate2D(
-//                latitude: latitude!,
-//                longitude: longitude!),
-//            latitudinalMeters: 15000,
-//            longitudinalMeters: 15000)
-//
-//        mapView.region = region
-//
         print("Map View")
         
         
