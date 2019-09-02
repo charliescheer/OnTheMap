@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
-    let loginTextFieldDelegate = LoginTextFieldDelegate()
+    let loginTextFieldDelegate = CustomTextFieldDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
         passwordTextField.text = "raa8c4TEsUQRK2GvD(FnTEUD7"
         usernameTextField.delegate = loginTextFieldDelegate
         passwordTextField.delegate = loginTextFieldDelegate
+        signUpButton.layer.cornerRadius = 5
+        signUpButton.clipsToBounds = true
     }
 
     @IBAction func loginWasTapped(_ sender: Any) {

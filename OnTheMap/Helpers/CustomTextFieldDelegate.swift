@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginTextFieldDelegate: NSObject, UITextFieldDelegate {
+class CustomTextFieldDelegate: NSObject, UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.text = ""
         return true
