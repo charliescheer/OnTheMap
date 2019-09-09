@@ -19,15 +19,6 @@ class MapViewController: MapAndPinViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         handleStudentLocationResponse()
-        
-        print("Map View")
-        
-        if OnTheMapAPIClient.loggedInUserLocationIsSavedToUserDefaults() {
-            print("location found")
-            OnTheMapAPIClient.getSavedUserLocation(completion: { (results) in
-                print(results?.firstName)
-            })
-        }
     }
     
     func handleStudentLocationResponse() {

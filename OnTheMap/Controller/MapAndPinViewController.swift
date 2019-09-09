@@ -60,28 +60,6 @@ class MapAndPinViewController: UIViewController {
     @objc func addWasTapped() {
         performSegue(withIdentifier: constants.addSegue, sender: self)
     }
-
-    func getLoggedInUserLocationFromDefaults() -> StudentLocationResults? {
-        var studentLocation: StudentLocationResults?
-    
-        let storedData = UserDefaults.standard.data(forKey: OnTheMapAPIClient.constants.loggedInUserLocation)
-        
-        guard let data = storedData else {
-            print("Couldn't retrieve data")
-            return nil
-        }
-        
-        let decoder = JSONDecoder()
-        do {
-            let decodedUserLocation = try decoder.decode(StudentLocationResults.self, from: data)
-            
-            studentLocation = decodedUserLocation
-        } catch {
-            print(error)
-        }
-    
-        return studentLocation
-    }
 }
 
 

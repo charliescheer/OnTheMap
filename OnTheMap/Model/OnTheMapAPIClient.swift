@@ -348,34 +348,6 @@ class OnTheMapAPIClient {
             print(response?.objectId ?? "couldn't get objectId")
         }
     }
-    
-    class func loggedInUserLocationIsSavedToUserDefaults() -> Bool {
-        guard (UserDefaults.standard.data(forKey: "sessionId") != nil) else {
-            print("No Saved Data")
-            return false
-        }
-        
-        return true
-    }
-    
-    class func getSavedUserLocation(completion: @escaping (StudentLocationResults?) -> Void) {
-        guard let data = UserDefaults.standard.data(forKey: constants.loggedInUserLocation) else {
-            print("No Saved Data")
-            completion(nil)
-            return
-        }
-        
-        let decoder = PropertyListDecoder()
-        DispatchQueue.main.async {
-            do {
-                let decodedResponse = try decoder.decode(StudentLocationResults.self, from: data)
-                print("decoder finished")
-                completion(decodedResponse)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
 }
 
 extension OnTheMapAPIClient {

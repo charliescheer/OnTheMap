@@ -12,12 +12,11 @@ class PinListViewController: MapAndPinViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var userLocation: StudentLocationResults?
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         handleStudentLocationsRespone()
-        print("Pin List View")
+        
+        
     }
     
     func handleStudentLocationsRespone() {
@@ -30,17 +29,12 @@ class PinListViewController: MapAndPinViewController {
                     self.studentLocationResults = studentLocationArray
                     self.tableView.reloadData()
                     self.startActivityIndicator(self.activityIndicator, false)
-                    print("activity indicator finished")
                 }
             } else {
                 print(error!.localizedDescription)
             }
         }
-        
-        print(studentLocationResults.count)
     }
-    
-    
 }
 
 extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
