@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 
+//Class serves as the base for the list and map views
+//Setups up the navigation, add, and logout for the detail views
 class MapAndPinViewController: UIViewController {
     var studentLocationResults: [StudentLocationDetails] = []
     
@@ -28,20 +30,7 @@ class MapAndPinViewController: UIViewController {
     }
     
     @objc func logoutWasTapped() {
-        OnTheMapAPIClient.Logout { (success, error) in
-            if success {
-                print("Success")
-                
-                let destinationVC = LoginViewController.loadViewController()
-                self.present(destinationVC, animated: true, completion: nil)
-                
-            } else {
-                print(error?.localizedDescription ?? "Generic Error while logging out")
-            }
-        }
-        
-        
-        
+        OnTheMapAPIClient.Logout(completion: handleLogoutResponse(success:error:))
     }
     
     @objc func reloadWasTapped() {
@@ -50,7 +39,7 @@ class MapAndPinViewController: UIViewController {
     
     func handleReloadTapped(_ viewController: UIViewController) {
         if let mapController = viewController as? MapViewController {
-           mapController.handleStudentLocationResponse()
+            OnTheMapAPIClient.getStudentLocations(completion: mapController.handleStudentLocationResponse(success:results:error:))
         } else if let PinController = viewController as? PinListViewController {
             PinController.handleStudentLocationsRespone()
         }
@@ -59,6 +48,18 @@ class MapAndPinViewController: UIViewController {
     
     @objc func addWasTapped() {
         performSegue(withIdentifier: constants.addSegue, sender: self)
+    }
+    
+    func handleLogoutResponse(success: Bool, error: Error?) {
+        if success {
+            print("Logout Success")
+            
+            let destinationVC = LoginViewController.loadViewController()
+            self.present(destinationVC, animated: true, completion: nil)
+            
+        } else {
+            print(error?.localizedDescription ?? "Generic Error while logging out")
+        }
     }
 }
 

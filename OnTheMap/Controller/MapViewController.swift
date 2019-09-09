@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 
 class MapViewController: MapAndPinViewController {
-    var annotations = [MKPointAnnotation]()
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -18,53 +17,61 @@ class MapViewController: MapAndPinViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        handleStudentLocationResponse()
+        OnTheMapAPIClient.getStudentLocations(completion: handleStudentLocationResponse(success:results:error:))
     }
     
-    func handleStudentLocationResponse() {
-        startActivityIndicator(activityIndicator, true)
-        
-        
-        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
-            if success {
-                if let studentLocationArray = results {
-                    DispatchQueue.main.async {
-                        self.studentLocationResults = studentLocationArray
-                        self.addPinsFromStudentArrayToMap()
-                        
-                        self.mapView.addAnnotations(self.annotations)
-                        
-                        //TO DO handle the force unwrapping
-                        let randomNumber = Int.random(in: 0...self.studentLocationResults.count)
-                        let longitude = CLLocationDegrees(exactly: self.studentLocationResults[randomNumber].longitude)
-                        let latitude = CLLocationDegrees(exactly: self.studentLocationResults[randomNumber].latitude)
-                        let region = MKCoordinateRegion.init(
-                            center: CLLocationCoordinate2D(
-                                latitude: latitude!,
-                                longitude: longitude!),
-                            latitudinalMeters: 3000000,
-                            longitudinalMeters: 3000000)
-                        
-                        self.mapView.region = region
-                        
-                        self.startActivityIndicator(self.activityIndicator, false)
-                    }
-                }
+    //MARK: API response handler functions
+    func handleStudentLocationResponse(success: Bool, results: [StudentLocationDetails]?, error: Error?) {
+        if success {
+            //unwrap the results array
+            if let studentLocationArray = results {
+                
+                //set the controller's results array to the unwrapped results and add pins on the map
+                studentLocationResults = studentLocationArray
+                let annotations = createArrayOfAnnotationsForStudentLocations()
+                mapView.addAnnotations(annotations)
+                
+                //Choose a random student as the center student location
+                //set map to display random student's location
+                let randomNumber = Int.random(in: 0...studentLocationResults.count)
+                let longitude = CLLocationDegrees(exactly: studentLocationResults[randomNumber].longitude)
+                let latitude = CLLocationDegrees(exactly: studentLocationResults[randomNumber].latitude)
+                let region = MKCoordinateRegion.init(
+                    center: CLLocationCoordinate2D(
+                        latitude: latitude!,
+                        longitude: longitude!),
+                    latitudinalMeters: 3000000,
+                    longitudinalMeters: 3000000)
+                
+                mapView.region = region
+                
+                //Once completed end activity indicator
+                startActivityIndicator(self.activityIndicator, false)
+            }
+        } else {
+            if let error = error {
+                displayUIAlert(titled: "Couldn't get user locations", withMessage: error.localizedDescription)
             } else {
-                print("here?")
-                print(error?.localizedDescription)
+                print("Generic error occured getting user locations")
             }
         }
+    }
+    
+    //MARK: Map/pin  functions
+    
+    //Take the student location information and create an array of annotations
+    func createArrayOfAnnotationsForStudentLocations() -> [MKPointAnnotation] {
+        var annnotationArray = [MKPointAnnotation]()
         
-    }
-    
-    func addPinsFromStudentArrayToMap() {
         for student in studentLocationResults {
-            createPinForStudent(student: student)
+            annnotationArray.append(createPinForStudent(student: student))
         }
+        
+        return annnotationArray
     }
     
-    func createPinForStudent(student: StudentLocationDetails) {
+    //Create a point annotation for student location and return it
+    func createPinForStudent(student: StudentLocationDetails) -> MKPointAnnotation {
         let annotation = MKPointAnnotation()
         
         let latitude = CLLocationDegrees(exactly: Float(student.latitude))
@@ -75,12 +82,13 @@ class MapViewController: MapAndPinViewController {
         annotation.title = student.firstName + " " + student.lastName
         annotation.subtitle = student.mediaURL
         
-        annotations.append(annotation)
+        return annotation
     }
-
+    
 }
 
 
+//MARK: Map view functions
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuse = "pin"
