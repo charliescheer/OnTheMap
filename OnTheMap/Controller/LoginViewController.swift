@@ -20,8 +20,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameTextField.text = "scheer.charlie@gmail.com"
-        passwordTextField.text = "raa8c4TEsUQRK2GvD(FnTEUD7"
+        usernameTextField.text = ""
+        passwordTextField.text = ""
         usernameTextField.delegate = loginTextFieldDelegate
         passwordTextField.delegate = loginTextFieldDelegate
         signUpButton.layer.cornerRadius = 5
@@ -29,16 +29,18 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginWasTapped(_ sender: Any) {
+        //Attempt to login the user
         startActivityIndicator(activityIndicator, true)
         OnTheMapAPIClient.login(username: usernameTextField.text!, password: passwordTextField.text!, completion: handleLoginResponse(success:error:))
-        
     }
     
     @IBAction func signUpWasTapped(_ sender: Any) {
+        //Open the Signup page for udacity
         UIApplication.shared.open(OnTheMapAPIClient.Endpoints.signup.url)
         
     }
     
+    //Prepares for and loads the map storyboard and initial view controller
     func transitionToMapAndPinStoryBoard() {
         let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
         
@@ -48,21 +50,23 @@ class LoginViewController: UIViewController {
         }
         
         self.present(destination, animated: true, completion: nil)
-
     }
     
+    //Handles the repsonse to the API login attempt
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
-            print(success)
+            print("login successful")
             self.startActivityIndicator(self.activityIndicator, false)
-            
             self.transitionToMapAndPinStoryBoard()
         } else {
+            //Displays an generic error if the login fails and there is no returned error
             guard let error = error else {
                 displayUIAlert(titled: "Unknown Error", withMessage: "A generic error occured, please try again")
                 return
             }
             
+            //Display the error from the login response
+            //clear the password field
             displayUIAlert(titled: "Error", withMessage: error.localizedDescription)
             self.passwordTextField.text = ""
         }

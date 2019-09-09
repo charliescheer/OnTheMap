@@ -15,13 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        //Check and see if there is saved user information in User Defaults
+        //If there is load that information into the API client Auth struct and bypass the login view
+        //If not load the login view
         if OnTheMapAPIClient.authSessionIdIsSavedToUserDefaults() {
-            print("found session ID")
-            
             OnTheMapAPIClient.setSavedAuthSessionIdandUserID()
-            
-            
             
             let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
             let initialVC = storyboard.instantiateInitialViewController()
