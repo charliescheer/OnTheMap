@@ -40,8 +40,8 @@ class MapAndPinViewController: UIViewController {
     func handleReloadTapped(_ viewController: UIViewController) {
         if let mapController = viewController as? MapViewController {
             OnTheMapAPIClient.getStudentLocations(completion: mapController.handleStudentLocationResponse(success:results:error:))
-        } else if let PinController = viewController as? PinListViewController {
-            PinController.handleStudentLocationsRespone()
+        } else if let pinController = viewController as? PinListViewController {
+            OnTheMapAPIClient.getStudentLocations(completion: pinController.handleStudentLocationResponse(success:results:error:))
         }
     }
     

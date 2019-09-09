@@ -14,29 +14,33 @@ class PinListViewController: MapAndPinViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        handleStudentLocationsRespone()
-        
-        
+        OnTheMapAPIClient.getStudentLocations(completion: handleStudentLocationResponse(success:results:error:))
     }
     
-    func handleStudentLocationsRespone() {
+    //MARK: API Response Functions
+    func handleStudentLocationResponse(success: Bool, results: [StudentLocationDetails]?, error: Error?) {
         startActivityIndicator(activityIndicator, true)
         studentLocationResults.removeAll()
         tableView.reloadData()
-        OnTheMapAPIClient.getStudentLocations { (success, results, error) in
-            if success {
-                if let studentLocationArray = results {
-                    self.studentLocationResults = studentLocationArray
-                    self.tableView.reloadData()
-                    self.startActivityIndicator(self.activityIndicator, false)
-                }
-            } else {
-                print(error!.localizedDescription)
+        
+        if success {
+            if let studentLocationArray = results {
+                studentLocationResults = studentLocationArray
+                tableView.reloadData()
+                startActivityIndicator(activityIndicator, false)
             }
+        } else {
+            if let error = error {
+                displayUIAlert(titled: "Error getting student locations", withMessage: error.localizedDescription)
+            } else {
+                print("Generic error getting student locations")
+            }
+            startActivityIndicator(activityIndicator, false)
         }
     }
 }
 
+//MARK: Table view functions
 extension PinListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: constants.cellIdentifier, for: indexPath) as! PinListCell
