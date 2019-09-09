@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA0F6D882326AF44007A2793 /* UdacityAPIUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F6D872326AF44007A2793 /* UdacityAPIUpdateResponse.swift */; };
+		BA0F6D8A2326B6D5007A2793 /* UdacityAPIPutResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F6D892326B6D5007A2793 /* UdacityAPIPutResponseError.swift */; };
 		BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC2923174C49000F6D75 /* AppDelegate.swift */; };
 		BA8AAC2C23174C49000F6D75 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8AAC2B23174C49000F6D75 /* LoginViewController.swift */; };
 		BA8AAC2F23174C49000F6D75 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8AAC2D23174C49000F6D75 /* Login.storyboard */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA0F6D872326AF44007A2793 /* UdacityAPIUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIUpdateResponse.swift; sourceTree = "<group>"; };
+		BA0F6D892326B6D5007A2793 /* UdacityAPIPutResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIPutResponseError.swift; sourceTree = "<group>"; };
 		BA8AAC2623174C49000F6D75 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8AAC2923174C49000F6D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA8AAC2B23174C49000F6D75 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 				BA8AAC532318F922000F6D75 /* UdacityAPIErrorResponse.swift */,
 				BA8AAC572319B389000F6D75 /* UdacityAPILogoutResponse.swift */,
 				BA8AAC69231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift */,
+				BA0F6D872326AF44007A2793 /* UdacityAPIUpdateResponse.swift */,
+				BA0F6D892326B6D5007A2793 /* UdacityAPIPutResponseError.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -249,11 +255,13 @@
 				BA8AAC2A23174C49000F6D75 /* AppDelegate.swift in Sources */,
 				BA8AAC6A231CEEB4000F6D75 /* UdacityAPIPostLocationResponse.swift in Sources */,
 				BA8AAC562319020E000F6D75 /* CustomTextFieldDelegate.swift in Sources */,
+				BA0F6D8A2326B6D5007A2793 /* UdacityAPIPutResponseError.swift in Sources */,
 				BA8AAC68231CCEE3000F6D75 /* PostStudentLocationRequest.swift in Sources */,
 				BA8AAC582319B389000F6D75 /* UdacityAPILogoutResponse.swift in Sources */,
 				BA8AAC5C2319DC27000F6D75 /* User.swift in Sources */,
 				BA8AAC45231756FC000F6D75 /* PinListViewController.swift in Sources */,
 				BA8AAC47231758EC000F6D75 /* AddPinViewController.swift in Sources */,
+				BA0F6D882326AF44007A2793 /* UdacityAPIUpdateResponse.swift in Sources */,
 				BA8AAC62231C7625000F6D75 /* UIViewController+Helpers.swift in Sources */,
 				BA8AAC43231756A9000F6D75 /* MapViewController.swift in Sources */,
 				BA8AAC522318ABA0000F6D75 /* UdacityAPIResponse.swift in Sources */,

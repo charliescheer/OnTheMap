@@ -16,14 +16,28 @@ class AddPinMapViewController: UIViewController{
     
     @IBAction func setLocationWasTapped(_ sender: Any) {
         if let request = request {
-            OnTheMapAPIClient.postLoggedInUserLocation(body: request) { (success, error) in
-                if success {
-                    print("success")
-                } else {
-                    print("fail")
+            if UserDefaults.standard.bool(forKey: "hasSetLocation") {
+                OnTheMapAPIClient.putLoggedInUserLocation(body: request) { (success, error) in
+                    if success {
+                        print("update success")
+                    } else {
+                        print("update fail")
+                    }
+                    UserDefaults.standard.set(true, forKey: "hasSetLocation")
+                    
+                    self.transitionToMapAndPinStoryBoard()
                 }
-                
-                self.transitionToMapAndPinStoryBoard()
+            } else {
+                OnTheMapAPIClient.postLoggedInUserLocation(body: request) { (success, error) in
+                    if success {
+                        print("post success")
+                    } else {
+                        print("post fail")
+                    }
+                    UserDefaults.standard.set(true, forKey: "hasSetLocation")
+                    
+                    self.transitionToMapAndPinStoryBoard()
+                }
             }
         }
     }

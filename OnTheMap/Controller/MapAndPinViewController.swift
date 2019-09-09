@@ -35,6 +35,8 @@ class MapAndPinViewController: UIViewController {
                     let destinationVC = LoginViewController.loadViewController()
                     self.present(destinationVC, animated: true, completion: nil)
                 }
+                UserDefaults.standard.set(false, forKey: "hasSetLocation")
+                UserDefaults.standard.removeObject(forKey: "sessionId")
             } else {
                 print(error?.localizedDescription ?? "Generic Error while logging out")
             }

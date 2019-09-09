@@ -25,6 +25,7 @@ class OnTheMapAPIClient {
         case getUserData
         case getStudentLocation
         case postStudentLocation
+        case putStudentLocation
         
         var stringValue: String {
             switch self {
@@ -34,6 +35,7 @@ class OnTheMapAPIClient {
             case .getUserData: return Endpoints.baseURL + "users/" + Auth.key
             case .getStudentLocation: return Endpoints.baseURL + "StudentLocation" + "?limit=100"
             case .postStudentLocation: return Endpoints.baseURL + "StudentLocation"
+            case .putStudentLocation: return Endpoints.baseURL + "StudentLocation/" + Auth.key
             }
         }
         
@@ -86,7 +88,7 @@ class OnTheMapAPIClient {
                 }
                 mutableData = tempData
             }
-    
+            
             
             let decoder = JSONDecoder()
             
@@ -201,7 +203,44 @@ class OnTheMapAPIClient {
         task.resume()
     }
     
-
+    class func taskForPutRequest<ResponseType: Decodable, RequestType: Encodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(body) else {
+            print("Could not convert to JSON")
+            return
+        }
+        request.httpBody = data
+        print(request)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            
+            let json = try! JSONSerialization.jsonObject(with: data, options: [])
+            print(json)
+            
+            let decoder = JSONDecoder()
+            do {
+                let decodedData = try decoder.decode(ResponseType.self, from: data)
+                completion(decodedData, nil)
+            } catch {
+                do {
+                    let decodedError = try decoder.decode(UdacityAPIPutErrorResponse.self, from: data)
+                    completion(nil, decodedError)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+        }
+        task.resume()
+        
+    }
     
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let sessionRequest = UdacitySessionRequest(username: username, password: password)
@@ -259,8 +298,8 @@ class OnTheMapAPIClient {
             }
         }
     }
-
-
+    
+    
     //Takes optional data and confirms the data is not nil
     //If the data is not nil, checks to see if the data is not empty
     //If both checks pass, removes the frist five characters from the data and returns the new data
@@ -295,13 +334,11 @@ class OnTheMapAPIClient {
             print("No Saved Data")
             return
         }
-        
-        print("decoder created")
+    
         let decoder = PropertyListDecoder()
         do {
-            print("decoder running")
+            
             let decodedResponse = try decoder.decode(UdacityAPILoginResponse.self, from: data)
-            print("decoder finished")
             Auth.sessionId = decodedResponse.session.sessionId
             Auth.key = decodedResponse.account.key
             print(Auth.sessionId)
@@ -346,6 +383,21 @@ class OnTheMapAPIClient {
             }
             
             print(response?.objectId ?? "couldn't get objectId")
+        }
+    }
+    
+    class func putLoggedInUserLocation(body: StudentLocationResults, completion: @escaping (Bool, Error?) -> Void) {
+        taskForPutRequest(url: Endpoints.putStudentLocation.url, responseType: UdacityAPIUpdateResponse.self, body: body) { (response, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                    return
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            }
         }
     }
 }
