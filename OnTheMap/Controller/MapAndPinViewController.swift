@@ -11,15 +11,10 @@ import MapKit
 
 class MapAndPinViewController: UIViewController {
     var studentLocationResults: [StudentLocationResults] = []
-    var userLocation: PostStudentLocationRequest?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("userId Key \(OnTheMapAPIClient.Auth.key)")
-        print("session Id \(OnTheMapAPIClient.Auth.sessionId)")
-        
         
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutWasTapped))
@@ -28,9 +23,7 @@ class MapAndPinViewController: UIViewController {
             UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.reloadWasTapped)),
         ]
         
-        if let location = getLoggedInUserLocationFromDefaults() {
-            userLocation = location
-        }
+
         
     }
     
@@ -68,8 +61,8 @@ class MapAndPinViewController: UIViewController {
         performSegue(withIdentifier: constants.addSegue, sender: self)
     }
 
-    func getLoggedInUserLocationFromDefaults() -> PostStudentLocationRequest? {
-        var studentLocation: PostStudentLocationRequest?
+    func getLoggedInUserLocationFromDefaults() -> StudentLocationResults? {
+        var studentLocation: StudentLocationResults?
     
         let storedData = UserDefaults.standard.data(forKey: OnTheMapAPIClient.constants.loggedInUserLocation)
         
@@ -80,7 +73,7 @@ class MapAndPinViewController: UIViewController {
         
         let decoder = JSONDecoder()
         do {
-            let decodedUserLocation = try decoder.decode(PostStudentLocationRequest.self, from: data)
+            let decodedUserLocation = try decoder.decode(StudentLocationResults.self, from: data)
             
             studentLocation = decodedUserLocation
         } catch {

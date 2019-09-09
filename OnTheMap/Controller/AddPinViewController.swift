@@ -45,9 +45,10 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            self.createPostStudentLocationRequest(url: url, location: self.setLocation!)
+            self.createStudentLocationRequest(url: url, location: self.setLocation!)
             
         }
+
     }
     
     @IBAction func cancelWasTapped(_ sender: Any) {
@@ -105,20 +106,21 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func createPostStudentLocationRequest(url: URL, location: CLLocation) {
+    func createStudentLocationRequest(url: URL, location: CLLocation) {
         OnTheMapAPIClient.getLoggedinUserData { (success, user, error) in
             guard let user = user else {
                 self.displayUIAlert(titled: "Couldn't Post Location", withMessage: error?.localizedDescription ?? "Generic Error")
                 return
             }
             
-            let request = PostStudentLocationRequest(uniqueKey: user.userId,
-                                                     firstName: user.firstName,
-                                                     lastName: user.lastName,
-                                                     mapString: self.locationTextField.text!,
-                                                     mediaURL: url.absoluteString,
-                                                     longitude: Float(location.coordinate.longitude),
-                                                     latitude: Float(location.coordinate.latitude)
+            let request = StudentLocationResults(objectId: user.userId,
+                                                    uniqueKey: user.userId,
+                                                    firstName: user.firstName,
+                                                    lastName: user.lastName,
+                                                    mapString: self.locationTextField.text!,
+                                                    mediaURL: url.absoluteString,
+                                                    latitude: Float(location.coordinate.latitude),
+                                                    longitude: Float(location.coordinate.longitude)
             )
             
             print(request.latitude)

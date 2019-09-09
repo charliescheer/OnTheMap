@@ -20,13 +20,14 @@ class MapViewController: MapAndPinViewController {
         super.viewDidAppear(animated)
         handleStudentLocationResponse()
         
-        if let user = userLocation {
-            
-        }
-        
         print("Map View")
         
-        
+        if OnTheMapAPIClient.loggedInUserLocationIsSavedToUserDefaults() {
+            print("location found")
+            OnTheMapAPIClient.getSavedUserLocation(completion: { (results) in
+                print(results?.firstName)
+            })
+        }
     }
     
     func handleStudentLocationResponse() {
@@ -59,7 +60,8 @@ class MapViewController: MapAndPinViewController {
                     }
                 }
             } else {
-                print(error!.localizedDescription)
+                print("here?")
+                print(error?.localizedDescription)
             }
         }
         

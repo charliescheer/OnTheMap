@@ -318,12 +318,11 @@ class OnTheMapAPIClient {
                 return
             }
             
-            print(user.firstName)
-            completion(true, response, nil)
+            completion(true, user, nil)
         }
     }
     
-    class func postLoggedInUserLocation(body: PostStudentLocationRequest, completion: @escaping (Bool, Error?) -> Void) {
+    class func postLoggedInUserLocation(body: StudentLocationResults, completion: @escaping (Bool, Error?) -> Void) {
         
         makePostRequest(url: Endpoints.postStudentLocation.url, responseType: UdacityAPIPostLocationResponse.self, headers: ["Content-Type"], body: body, secureReturn: false) { (response, error) in
             if error != nil {
@@ -333,10 +332,11 @@ class OnTheMapAPIClient {
                 }
             } else {
                 DispatchQueue.main.async {
-                    let encoder = JSONEncoder()
+                    let encoder = PropertyListEncoder()
                     do {
                         let encodedData = try encoder.encode(body)
                         UserDefaults.standard.set(encodedData, forKey: constants.loggedInUserLocation)
+                        print("saved user location")
                     } catch {
                         print(error)
                     }
@@ -346,6 +346,34 @@ class OnTheMapAPIClient {
             }
             
             print(response?.objectId ?? "couldn't get objectId")
+        }
+    }
+    
+    class func loggedInUserLocationIsSavedToUserDefaults() -> Bool {
+        guard (UserDefaults.standard.data(forKey: "sessionId") != nil) else {
+            print("No Saved Data")
+            return false
+        }
+        
+        return true
+    }
+    
+    class func getSavedUserLocation(completion: @escaping (StudentLocationResults?) -> Void) {
+        guard let data = UserDefaults.standard.data(forKey: constants.loggedInUserLocation) else {
+            print("No Saved Data")
+            completion(nil)
+            return
+        }
+        
+        let decoder = PropertyListDecoder()
+        DispatchQueue.main.async {
+            do {
+                let decodedResponse = try decoder.decode(StudentLocationResults.self, from: data)
+                print("decoder finished")
+                completion(decodedResponse)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

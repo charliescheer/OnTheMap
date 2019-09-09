@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class AddPinMapViewController: UIViewController{
-    var request: PostStudentLocationRequest?
+    var request: StudentLocationResults?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -62,7 +62,7 @@ class AddPinMapViewController: UIViewController{
         mapView.reloadInputViews()
     }
     
-    func createPinForPostingFromRequest(_ request: PostStudentLocationRequest) -> MKPointAnnotation {
+    func createPinForPostingFromRequest(_ request: StudentLocationResults) -> MKPointAnnotation {
         let annotation = MKPointAnnotation()
         
         let latitude = CLLocationDegrees(exactly: request.latitude)

@@ -55,11 +55,13 @@ class LoginViewController: UIViewController {
         if success {
             print(success)
             self.startActivityIndicator(self.activityIndicator, false)
-            OnTheMapAPIClient.getLoggedinUserData { (success, user, error) in
-                print(success)
-                print(user?.firstName)
-                print(error?.localizedDescription)
-            }
+//            OnTheMapAPIClient.getLoggedinUserData { (success, user, error) in
+//                if success {
+//                    print("Login Successful")
+//                } else {
+//                    print(error?.localizedDescription)
+//                }
+//            }
             
             self.transitionToMapAndPinStoryBoard()
         } else {
