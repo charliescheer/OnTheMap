@@ -64,7 +64,7 @@ class MapViewController: MapAndPinViewController {
         }
     }
     
-    func createPinForStudent(student: StudentLocationResults) {
+    func createPinForStudent(student: StudentLocationDetails) {
         let annotation = MKPointAnnotation()
         
         let latitude = CLLocationDegrees(exactly: Float(student.latitude))

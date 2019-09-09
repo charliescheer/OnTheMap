@@ -44,8 +44,8 @@ class OnTheMapAPIClient {
         }
     }
     
-    
-    class func makePostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, headers: [String], body: RequestType, secureReturn: Bool, completion: @escaping (ResponseType?, Error?) -> Void ) {
+    //MARK: Generic API Functions
+    private class func taskForPostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, headers: [String], body: RequestType, secureReturn: Bool, completion: @escaping (ResponseType?, Error?) -> Void ) {
         
         //Define the URL Request
         var request = URLRequest(url: url)
@@ -111,7 +111,8 @@ class OnTheMapAPIClient {
         session.resume()
     }
     
-    class func taskForDeleteRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+    private class func taskForDeleteRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) {
+        //Define the Delete request
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -125,6 +126,7 @@ class OnTheMapAPIClient {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
         
+        //Begin URL Task
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = removeSecurityDataFromResponseData(data) else {
                 return
@@ -138,13 +140,14 @@ class OnTheMapAPIClient {
                     completion(response, nil)
                 }
             } catch {
+                
+                //Decode error if there is one
                 do {
                     let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: data)
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
                 } catch {
-                    print("here?")
                     print(error)
                 }
             }
@@ -153,11 +156,15 @@ class OnTheMapAPIClient {
         task.resume()
     }
     
-    class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, secureReturn: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
+    private class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, secureReturn: Bool, completion: @escaping (ResponseType?, Error?) -> Void) {
+        //Define the Get request
         let request = URLRequest(url: url)
+        
+        //Begin the task
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             var mutableData = Data()
             
+            //If the 5 security bits are at the beginning of the JSON response remove them before decoding
             if secureReturn {
                 guard let tempData = removeSecurityDataFromResponseData(data) else {
                     DispatchQueue.main.async {
@@ -178,6 +185,7 @@ class OnTheMapAPIClient {
                 mutableData = tempData
             }
             
+            //Begin Decoding JSON response
             let decoder = JSONDecoder()
             do {
                 let response = try decoder.decode(ResponseType.self, from: mutableData)
@@ -187,6 +195,7 @@ class OnTheMapAPIClient {
                 }
             } catch {
                 do {
+                    //Decode Error if decoding fails
                     let errorResponse = try decoder.decode(UdacityAPIErrorResponse.self, from: mutableData)
                     
                     DispatchQueue.main.async {
@@ -203,7 +212,8 @@ class OnTheMapAPIClient {
         task.resume()
     }
     
-    class func taskForPutRequest<ResponseType: Decodable, RequestType: Encodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+    private class func taskForPutRequest<ResponseType: Decodable, RequestType: Encodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+        //Define Put request
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         
@@ -215,21 +225,21 @@ class OnTheMapAPIClient {
         request.httpBody = data
         print(request)
         
+        //Being data task
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data else {
                 completion(nil, error)
                 return
             }
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-            
+            //Begin decoding JSON
             let decoder = JSONDecoder()
             do {
                 let decodedData = try decoder.decode(ResponseType.self, from: data)
                 completion(decodedData, nil)
             } catch {
                 do {
+                    //Decode error if present
                     let decodedError = try decoder.decode(UdacityAPIPutErrorResponse.self, from: data)
                     completion(nil, decodedError)
                 } catch {
@@ -242,18 +252,25 @@ class OnTheMapAPIClient {
         
     }
     
+    
+    //MARK: Active API functions
+    
+    //Log into the API given user credentials
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let sessionRequest = UdacitySessionRequest(username: username, password: password)
-        
-        makePostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest, secureReturn: true) { (response, error) in
+        //Create post request for API Login
+        taskForPostRequest(url: Endpoints.login.url, responseType: UdacityAPILoginResponse.self, headers: ["Accept", "Content-Type"], body: sessionRequest, secureReturn: true) { (response, error) in
             if let response = response {
+                //Set Auth login in Udacity API Auth struct
                 Auth.sessionId = response.session.sessionId
                 Auth.key = response.account.key
                 
+                //Return true to completion handler if successful
                 DispatchQueue.main.async {
                     completion(true, nil)
                 }
                 
+                //Encode and save Login Response to User Defaults
                 let encoder = PropertyListEncoder()
                 do {
                     let data = try encoder.encode(response)
@@ -262,6 +279,7 @@ class OnTheMapAPIClient {
                     print(error.localizedDescription)
                 }
             } else {
+                //return false to copletion handler if fails
                 DispatchQueue.main.async {
                     completion(false, error)
                 }
@@ -269,15 +287,22 @@ class OnTheMapAPIClient {
         }
     }
     
+    //Logout of given session
     class func Logout(completion: @escaping (Bool, Error?) -> Void) {
+        //Create delete task request for API
         taskForDeleteRequest(url: OnTheMapAPIClient.Endpoints.logout.url, responseType: UdacityAPILogoutResponse.self) { (response, error) in
-            if let response = response {
-                UserDefaults.standard.set(nil, forKey: "sessionId")
-                print(response.session.sessionId)
+            //If there is no error
+            if error != nil {
+                //Remove saved information from user defaults
+                UserDefaults.standard.set(false, forKey: "hasSetLocation")
+                UserDefaults.standard.removeObject(forKey: "sessionId")
+            
+                //return true to completion handler
                 DispatchQueue.main.async {
                     completion(true, nil)
                 }
             } else {
+                //If fails return false and the error.
                 DispatchQueue.main.async {
                     completion(false, error)
                 }
@@ -285,13 +310,16 @@ class OnTheMapAPIClient {
         }
     }
     
-    class func getStudentLocations(completion: @escaping (Bool, [StudentLocationResults]?, Error?) -> Void) {
+    //Get public student location data from the API
+    class func getStudentLocations(completion: @escaping (Bool, [StudentLocationDetails]?, Error?) -> Void) {
         taskForGetRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocation.self, secureReturn: false) { (response, error) in
             if let response = response {
+                //If there is a response from the API return true and the response to the completion handle
                 DispatchQueue.main.async {
                     completion(true, response.results, nil)
                 }
             } else {
+                //Return error and false if there is no response
                 DispatchQueue.main.async {
                     completion(false, nil, nil)
                 }
@@ -299,11 +327,60 @@ class OnTheMapAPIClient {
         }
     }
     
+    //Get public data for logged in user
+    class func getLoggedinUserData(completion: @escaping (Bool, User?, Error?) -> Void) {
+        taskForGetRequest(url: Endpoints.getUserData.url, responseType: User.self, secureReturn: true) { (response, error) in
+            guard let user = response else {
+                print("Could not access user info")
+                completion(false, nil, error)
+                return
+            }
+            
+            completion(true, user, nil)
+        }
+    }
+    
+    //Post the logged in user's location to the API
+    class func postLoggedInUserLocation(body: StudentLocationDetails, completion: @escaping (Bool, Error?) -> Void) {
+        taskForPostRequest(url: Endpoints.postStudentLocation.url, responseType: UdacityAPIPostLocationResponse.self, headers: ["Content-Type"], body: body, secureReturn: false) { (response, error) in
+            //Handle response from API for posting the logged in user's location
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                    return
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                    print(response?.objectId ?? "couldn't get objectId")
+                }
+            }
+        }
+    }
+    
+    //create a put request to update the logged in user's location
+    class func putLoggedInUserLocation(body: StudentLocationDetails, completion: @escaping (Bool, Error?) -> Void) {
+        taskForPutRequest(url: Endpoints.putStudentLocation.url, responseType: UdacityAPIUpdateResponse.self, body: body) { (response, error) in
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                    return
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            }
+        }
+    }
+    
+    
+    //MARK: Helper API Functions
     
     //Takes optional data and confirms the data is not nil
     //If the data is not nil, checks to see if the data is not empty
     //If both checks pass, removes the frist five characters from the data and returns the new data
-    class func removeSecurityDataFromResponseData(_ data: Data?) -> Data? {
+    private class func removeSecurityDataFromResponseData(_ data: Data?) -> Data? {
         guard let data = data else {
             return nil
         }
@@ -344,60 +421,6 @@ class OnTheMapAPIClient {
             print(Auth.sessionId)
         } catch {
             print(error.localizedDescription)
-        }
-    }
-    
-    class func getLoggedinUserData(completion: @escaping (Bool, User?, Error?) -> Void) {
-        taskForGetRequest(url: Endpoints.getUserData.url, responseType: User.self, secureReturn: true) { (response, error) in
-            guard let user = response else {
-                print("Could not access user info")
-                completion(false, nil, error)
-                return
-            }
-            
-            completion(true, user, nil)
-        }
-    }
-    
-    class func postLoggedInUserLocation(body: StudentLocationResults, completion: @escaping (Bool, Error?) -> Void) {
-        
-        makePostRequest(url: Endpoints.postStudentLocation.url, responseType: UdacityAPIPostLocationResponse.self, headers: ["Content-Type"], body: body, secureReturn: false) { (response, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    completion(false, error)
-                    return
-                }
-            } else {
-                DispatchQueue.main.async {
-                    let encoder = PropertyListEncoder()
-                    do {
-                        let encodedData = try encoder.encode(body)
-                        UserDefaults.standard.set(encodedData, forKey: constants.loggedInUserLocation)
-                        print("saved user location")
-                    } catch {
-                        print(error)
-                    }
-                    completion(true, nil)
-                    print(response?.objectId ?? "couldn't get objectId")
-                }
-            }
-            
-            print(response?.objectId ?? "couldn't get objectId")
-        }
-    }
-    
-    class func putLoggedInUserLocation(body: StudentLocationResults, completion: @escaping (Bool, Error?) -> Void) {
-        taskForPutRequest(url: Endpoints.putStudentLocation.url, responseType: UdacityAPIUpdateResponse.self, body: body) { (response, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    completion(false, error)
-                    return
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion(true, nil)
-                }
-            }
         }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class MapAndPinViewController: UIViewController {
-    var studentLocationResults: [StudentLocationResults] = []
+    var studentLocationResults: [StudentLocationDetails] = []
     
     
     override func viewDidLoad() {
@@ -31,12 +31,10 @@ class MapAndPinViewController: UIViewController {
         OnTheMapAPIClient.Logout { (success, error) in
             if success {
                 print("Success")
-                DispatchQueue.main.async {
-                    let destinationVC = LoginViewController.loadViewController()
-                    self.present(destinationVC, animated: true, completion: nil)
-                }
-                UserDefaults.standard.set(false, forKey: "hasSetLocation")
-                UserDefaults.standard.removeObject(forKey: "sessionId")
+                
+                let destinationVC = LoginViewController.loadViewController()
+                self.present(destinationVC, animated: true, completion: nil)
+                
             } else {
                 print(error?.localizedDescription ?? "Generic Error while logging out")
             }

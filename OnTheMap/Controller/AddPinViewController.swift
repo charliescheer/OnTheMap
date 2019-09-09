@@ -113,7 +113,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            let request = StudentLocationResults(objectId: user.userId,
+            let request = StudentLocationDetails(objectId: user.userId,
                                                     uniqueKey: user.userId,
                                                     firstName: user.firstName,
                                                     lastName: user.lastName,
