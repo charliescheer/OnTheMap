@@ -28,7 +28,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         locationTextField.text = ""
         urlTextField.text = ""
     }
-    //TO DO Go through the flow of converting the string to location and see if there are too many optionals for the location.
     
     @IBAction func findLocationWasTapped(_ sender: Any) {
         
