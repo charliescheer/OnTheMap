@@ -17,41 +17,11 @@ class AddPinMapViewController: UIViewController{
     @IBAction func setLocationWasTapped(_ sender: Any) {
         if let request = request {
             if UserDefaults.standard.bool(forKey: "hasSetLocation") {
-                OnTheMapAPIClient.putLoggedInUserLocation(body: request) { (success, error) in
-                    if success {
-                        print("update success")
-                    } else {
-                        print("update fail")
-                    }
-                    UserDefaults.standard.set(true, forKey: "hasSetLocation")
-                    
-                    self.transitionToMapAndPinStoryBoard()
-                }
+                OnTheMapAPIClient.putLoggedInUserLocation(body: request, completion: handleAPILocationRequest(success:error:))
             } else {
-                OnTheMapAPIClient.postLoggedInUserLocation(body: request) { (success, error) in
-                    if success {
-                        print("post success")
-                    } else {
-                        print("post fail")
-                    }
-                    UserDefaults.standard.set(true, forKey: "hasSetLocation")
-                    
-                    self.transitionToMapAndPinStoryBoard()
-                }
+                OnTheMapAPIClient.postLoggedInUserLocation(body: request, completion: handleAPILocationRequest(success:error:))
             }
         }
-    }
-    
-    func transitionToMapAndPinStoryBoard() {
-        let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
-        
-        guard let destination = storyboard.instantiateInitialViewController() else {
-            print("failed to instantiate view controller")
-            return
-        }
-        
-        self.present(destination, animated: true, completion: nil)
-        
     }
     
     override func viewDidLoad() {
@@ -76,6 +46,7 @@ class AddPinMapViewController: UIViewController{
         mapView.reloadInputViews()
     }
     
+    //Create a pin for the current request location
     func createPinForPostingFromRequest(_ request: StudentLocationDetails) -> MKPointAnnotation {
         let annotation = MKPointAnnotation()
         
@@ -91,8 +62,37 @@ class AddPinMapViewController: UIViewController{
         print(annotation)
         return annotation
     }
+    
+    //Return to the logged in map section
+    func transitionToMapAndPinStoryBoard() {
+        let storyboard = UIStoryboard(name: "MapAndPin", bundle: Bundle.main)
+        
+        guard let destination = storyboard.instantiateInitialViewController() else {
+            print("failed to instantiate view controller")
+            return
+        }
+        
+        self.present(destination, animated: true, completion: nil)
+        
+    }
+    
+    //Print success if API location request succeeded
+    //Print error if failed
+    //Return to the map view controller
+    func handleAPILocationRequest(success: Bool, error: Error?) {
+        if success {
+            print("location saved successfully")
+        } else {
+            print("location failed")
+            print(error?.localizedDescription ?? "Generic Error")
+        }
+        UserDefaults.standard.set(true, forKey: "hasSetLocation")
+        
+        self.transitionToMapAndPinStoryBoard()
+    }
 }
 
+//MARK: Map view functions
 extension AddPinMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuse = "pin"

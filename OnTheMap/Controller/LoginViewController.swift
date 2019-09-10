@@ -56,8 +56,8 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
             print("login successful")
-            self.startActivityIndicator(self.activityIndicator, false)
-            self.transitionToMapAndPinStoryBoard()
+            startActivityIndicator(activityIndicator, false)
+            transitionToMapAndPinStoryBoard()
         } else {
             //Displays an generic error if the login fails and there is no returned error
             guard let error = error else {
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
             //Display the error from the login response
             //clear the password field
             displayUIAlert(titled: "Error", withMessage: error.localizedDescription)
-            self.passwordTextField.text = ""
+            passwordTextField.text = ""
         }
     }
 }

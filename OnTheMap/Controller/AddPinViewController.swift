@@ -33,18 +33,20 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     @IBAction func findLocationWasTapped(_ sender: Any) {
         
         convertStringToLocation(stringText: locationTextField.text!) { (location, error) in
-            self.setLocation = location
-            
-            guard self.setLocation != nil else {
-                print("no location")
+            //Set user location
+            guard let location = location else {
+                self.displayUIAlert(titled: "Couldn't find location", withMessage: error?.localizedDescription ?? "Generic error finding location")
                 return
             }
+            self.setLocation = location
             
+            //Set user URL
             guard let url = self.convertStringtoURL(string: self.urlTextField.text!) else {
                 print("no url")
                 return
             }
             
+            //Create student location request
             self.createStudentLocationRequest(url: url, location: self.setLocation!)
             
         }
@@ -63,11 +65,9 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             guard
                 let placemarks = placemarks,
                 let location = placemarks.first?.location else {
-                    self.displayUIAlert(titled: "Couldn't Find Location", withMessage: error?.localizedDescription ?? "")
                     DispatchQueue.main.async {
                         completion(nil, error)
                     }
-                    
                     return
             }
             
@@ -77,19 +77,6 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             }
             
             
-        }
-    }
-    
-    
-    func handleLocationConversion(location: CLLocation?, error: Error?) {
-        guard let location = location else {
-            print("couldn't unwrap location")
-            print(error)
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.setLocation = location
         }
     }
     
@@ -107,12 +94,14 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     }
     
     func createStudentLocationRequest(url: URL, location: CLLocation) {
+        //Get currently logged in user information
         OnTheMapAPIClient.getLoggedinUserData { (success, user, error) in
             guard let user = user else {
                 self.displayUIAlert(titled: "Couldn't Post Location", withMessage: error?.localizedDescription ?? "Generic Error")
                 return
             }
             
+            //Create a request to send to the API on the next VC
             let request = StudentLocationDetails(objectId: user.userId,
                                                     uniqueKey: user.userId,
                                                     firstName: user.firstName,
@@ -123,14 +112,11 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
                                                     longitude: Float(location.coordinate.longitude)
             )
             
-            print(request.latitude)
-            print(request.longitude)
-            
-            
+            //Instantiate the next VC and pass the request into it
+            //Push destination VC
             let destinvationVC = AddPinMapViewController.loadViewController()
             destinvationVC.request = request
             self.navigationController?.pushViewController(destinvationVC, animated: true)
-            
         }
     }
 }
