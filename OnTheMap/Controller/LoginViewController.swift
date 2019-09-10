@@ -20,8 +20,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameTextField.text = "scheer.charlie@gmail.com"
-        passwordTextField.text = "raa8c4TEsUQRK2GvD(FnTEUD7"
+        usernameTextField.text = ""
+        passwordTextField.text = ""
         usernameTextField.delegate = loginTextFieldDelegate
         passwordTextField.delegate = loginTextFieldDelegate
         signUpButton.layer.cornerRadius = 5

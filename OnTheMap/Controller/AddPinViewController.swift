@@ -25,8 +25,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         findLocationButton.clipsToBounds = true
         locationTextField.delegate = textFieldDelegate
         urlTextField.delegate = textFieldDelegate
-        locationTextField.text = "1 Infinite Loop, CA, USA"
-        urlTextField.text = "https://udacity.com/"
+        locationTextField.text = ""
+        urlTextField.text = ""
     }
     //TO DO Go through the flow of converting the string to location and see if there are too many optionals for the location.
     
