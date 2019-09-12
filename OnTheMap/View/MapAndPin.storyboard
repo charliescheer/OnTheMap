@@ -246,12 +246,16 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uhB-uT-21o">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Y79-9i-3ML" firstAttribute="top" secondItem="8gk-vw-N9M" secondAttribute="bottom" constant="50" id="0jq-aC-8lw"/>
                             <constraint firstItem="k5g-Tg-T5B" firstAttribute="top" secondItem="Y79-9i-3ML" secondAttribute="bottom" constant="10" id="KWw-7G-ZNW"/>
                             <constraint firstItem="k5g-Tg-T5B" firstAttribute="leading" secondItem="GVS-VD-woZ" secondAttribute="leading" constant="16" id="RcZ-tB-NDZ"/>
+                            <constraint firstItem="uhB-uT-21o" firstAttribute="centerY" secondItem="sIQ-Aj-pZu" secondAttribute="centerY" id="TEv-dr-UiT"/>
                             <constraint firstItem="gzX-q0-7Xx" firstAttribute="top" secondItem="GVS-VD-woZ" secondAttribute="top" id="Ulg-wa-ojp"/>
                             <constraint firstItem="Y79-9i-3ML" firstAttribute="leading" secondItem="GVS-VD-woZ" secondAttribute="leading" constant="16" id="Uny-c5-6KP"/>
                             <constraint firstItem="8gk-vw-N9M" firstAttribute="centerX" secondItem="GVS-VD-woZ" secondAttribute="centerX" id="Wwh-i5-Ea5"/>
@@ -260,6 +264,7 @@
                             <constraint firstItem="GVS-VD-woZ" firstAttribute="trailing" secondItem="Y79-9i-3ML" secondAttribute="trailing" constant="16" id="dOc-6Y-n6p"/>
                             <constraint firstItem="GVS-VD-woZ" firstAttribute="trailing" secondItem="6HH-TD-gUN" secondAttribute="trailing" constant="16" id="gP6-dd-lgs"/>
                             <constraint firstItem="6HH-TD-gUN" firstAttribute="leading" secondItem="GVS-VD-woZ" secondAttribute="leading" constant="16" id="gkr-7x-SX0"/>
+                            <constraint firstItem="uhB-uT-21o" firstAttribute="centerX" secondItem="sIQ-Aj-pZu" secondAttribute="centerX" id="ozo-6b-kNz"/>
                             <constraint firstItem="gzX-q0-7Xx" firstAttribute="leading" secondItem="GVS-VD-woZ" secondAttribute="leading" id="peS-yI-s8D"/>
                             <constraint firstItem="gzX-q0-7Xx" firstAttribute="trailing" secondItem="GVS-VD-woZ" secondAttribute="trailing" id="xyy-gW-kVn"/>
                             <constraint firstItem="8gk-vw-N9M" firstAttribute="top" secondItem="gzX-q0-7Xx" secondAttribute="bottom" constant="50" id="ycC-2p-2gs"/>
@@ -269,6 +274,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="zzg-wh-gv8"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="uhB-uT-21o" id="P33-pr-YA5"/>
                         <outlet property="findLocationButton" destination="6HH-TD-gUN" id="SHV-xk-eHs"/>
                         <outlet property="locationTextField" destination="Y79-9i-3ML" id="IpS-dm-Mrw"/>
                         <outlet property="urlTextField" destination="k5g-Tg-T5B" id="A7L-Sy-I3T"/>

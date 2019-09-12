@@ -17,6 +17,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
             //Create student location request
             self.createStudentLocationRequest(url: url, location: self.setLocation!)
             
+            self.startActivityIndicator(self.activityIndicator, false)
         }
 
     }
@@ -59,6 +61,8 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     
     func convertStringToLocation(stringText: String, completion: @escaping (CLLocation?, Error?) -> Void) {
         let geoCoder = CLGeocoder()
+        
+        self.startActivityIndicator(activityIndicator, true)
         
         geoCoder.geocodeAddressString(stringText) { (placemarks, error) in
             guard
