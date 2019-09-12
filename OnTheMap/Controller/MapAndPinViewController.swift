@@ -53,10 +53,10 @@ class MapAndPinViewController: UIViewController {
     func handleLogoutResponse(success: Bool, error: Error?) {
         if success {
             print("Logout Success")
-            
-            let destinationVC = LoginViewController.loadViewController()
-            self.present(destinationVC, animated: true, completion: nil)
-            
+            self.dismiss(animated: true) {
+                let destinationVC = LoginViewController.loadViewController()
+                self.present(destinationVC, animated: true, completion: nil)
+            }
         } else {
             print(error?.localizedDescription ?? "Generic Error while logging out")
         }

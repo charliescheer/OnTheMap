@@ -292,7 +292,8 @@ class OnTheMapAPIClient {
         //Create delete task request for API
         taskForDeleteRequest(url: OnTheMapAPIClient.Endpoints.logout.url, responseType: UdacityAPILogoutResponse.self) { (response, error) in
             //If there is no error
-            if error != nil {
+
+            if error == nil {
                 //Remove saved information from user defaults
                 UserDefaults.standard.set(false, forKey: "hasSetLocation")
                 UserDefaults.standard.removeObject(forKey: "sessionId")
