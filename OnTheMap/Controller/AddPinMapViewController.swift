@@ -44,6 +44,14 @@ class AddPinMapViewController: UIViewController{
         mapView.addAnnotation(createPinForPostingFromRequest(request))
         
         mapView.reloadInputViews()
+        
+
+    }
+    
+    @IBAction func cancelWasTapped(_ sender: Any) {
+        self.dismiss(animated: true) {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     //Create a pin for the current request location

@@ -313,15 +313,30 @@
                                     <action selector="setLocationWasTapped:" destination="cSi-EI-NbV" eventType="touchUpInside" id="Jew-Yb-O0B"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d62-Ol-Za1">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Add Location" id="MRp-3R-yDw">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="cwL-eV-uQW">
+                                            <connections>
+                                                <action selector="cancelWasTapped:" destination="cSi-EI-NbV" id="QsE-4O-5aj"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="top" secondItem="Mc9-48-64V" secondAttribute="top" id="0YS-Ps-can"/>
+                            <constraint firstItem="d62-Ol-Za1" firstAttribute="leading" secondItem="Mc9-48-64V" secondAttribute="leading" id="7Md-ia-uwP"/>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="bottom" secondItem="Mc9-48-64V" secondAttribute="bottom" id="8L9-HI-xiL"/>
+                            <constraint firstItem="d62-Ol-Za1" firstAttribute="trailing" secondItem="Mc9-48-64V" secondAttribute="trailing" id="BKZ-ue-Ybk"/>
                             <constraint firstItem="Mc9-48-64V" firstAttribute="bottom" secondItem="weT-uX-51d" secondAttribute="bottom" constant="50" id="IXY-rv-SdJ"/>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="trailing" secondItem="Mc9-48-64V" secondAttribute="trailing" id="LLx-LH-cHw"/>
                             <constraint firstItem="b3r-bn-KhO" firstAttribute="leading" secondItem="Mc9-48-64V" secondAttribute="leading" id="dg1-Hs-hbE"/>
                             <constraint firstItem="weT-uX-51d" firstAttribute="leading" secondItem="Mc9-48-64V" secondAttribute="leading" constant="16" id="gVh-Hb-D0w"/>
+                            <constraint firstItem="d62-Ol-Za1" firstAttribute="top" secondItem="Mc9-48-64V" secondAttribute="top" id="oGe-cR-uce"/>
                             <constraint firstItem="Mc9-48-64V" firstAttribute="trailing" secondItem="weT-uX-51d" secondAttribute="trailing" constant="16" id="y5v-pL-Z7w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mc9-48-64V"/>
