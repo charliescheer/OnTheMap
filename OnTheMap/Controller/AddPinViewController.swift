@@ -81,13 +81,13 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
     
     func convertStringtoURL(string: String) -> URL? {
         guard let url = URL(string: string) else {
-            print("Couldn't convert string to URL")
+            displayUIAlert(titled: "Couldn't convert string to URL", withMessage: "Please enter a valid URL")
             return nil
         }
         if UIApplication.shared.canOpenURL(url) {
             return url
         } else {
-            print("URL is not valid")
+            displayUIAlert(titled: "URL is not valid", withMessage: "Please enter a valid URL")
             return nil
         }
     }
