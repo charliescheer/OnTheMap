@@ -57,6 +57,8 @@ class LoginViewController: UIViewController {
         if success {
             print("login successful")
             startActivityIndicator(activityIndicator, false)
+            usernameTextField.text = ""
+            passwordTextField.text = ""
             transitionToMapAndPinStoryBoard()
         } else {
             //Displays an generic error if the login fails and there is no returned error

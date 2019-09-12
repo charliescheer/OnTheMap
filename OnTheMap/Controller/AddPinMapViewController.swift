@@ -92,7 +92,7 @@ class AddPinMapViewController: UIViewController{
             print("location saved successfully")
         } else {
             print("location failed")
-            print(error?.localizedDescription ?? "Generic Error")
+            displayUIAlert(titled: "Setting Location Failed", withMessage: error?.localizedDescription ?? "Generic Error")
         }
         UserDefaults.standard.set(true, forKey: "hasSetLocation")
         
