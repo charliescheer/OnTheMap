@@ -31,6 +31,7 @@ class MapAndPinViewController: UIViewController {
     
     @objc func logoutWasTapped() {
         OnTheMapAPIClient.Logout(completion: handleLogoutResponse(success:error:))
+        
     }
     
     @objc func reloadWasTapped() {
@@ -53,10 +54,9 @@ class MapAndPinViewController: UIViewController {
     func handleLogoutResponse(success: Bool, error: Error?) {
         if success {
             print("Logout Success")
-            self.dismiss(animated: true) {
-                let destinationVC = LoginViewController.loadViewController()
-                self.present(destinationVC, animated: true, completion: nil)
-            }
+            let destinationVC = LoginViewController.loadViewController()
+            self.dismiss(animated: true, completion: nil)
+            self.present(destinationVC, animated: true, completion: nil)
         } else {
             print(error?.localizedDescription ?? "Generic Error while logging out")
         }
