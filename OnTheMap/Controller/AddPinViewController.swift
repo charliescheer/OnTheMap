@@ -35,7 +35,7 @@ class AddPinViewController: UIViewController, UITextFieldDelegate {
         convertStringToLocation(stringText: locationTextField.text!) { (location, error) in
             //Set user location
             guard let location = location else {
-                self.displayUIAlert(titled: "Couldn't find location", withMessage: error?.localizedDescription ?? "Generic error finding location")
+                self.displayUIAlert(titled: "Couldn't find location", withMessage: "Please try a new location")
                 return
             }
             self.setLocation = location
